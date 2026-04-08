@@ -126,18 +126,6 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-  * {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  img, video, svg {
-    max-width: 100%;
-    height: auto;
-  }
   body {
     @apply bg-background text-foreground;
   }
