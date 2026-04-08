@@ -674,8 +674,32 @@ function ServicesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const cardAnimations = [
+    { initial: { opacity: 0, x: -60 }, animate: { opacity: 1, x: 0 } },   // Card 1: fade from left
+    { initial: { opacity: 0, x: 60 }, animate: { opacity: 1, x: 0 } },     // Card 2: fade from right
+    { initial: { opacity: 0, scale: 0.8 }, animate: { opacity: 1, scale: 1 } }, // Card 3: scale up
+    { initial: { opacity: 0, y: 60 }, animate: { opacity: 1, y: 0 } },     // Card 4: slide up
+    { initial: { opacity: 0 }, animate: { opacity: 1 } },                   // Card 5: fade in
+    { initial: { opacity: 0, rotate: -3, scale: 0.9 }, animate: { opacity: 1, rotate: 0, scale: 1 } }, // Card 6: rotate + fade
+  ];
+
+  const cardDelays = [0, 0.12, 0.08, 0.15, 0.2, 0.1];
+
+  const featuredCards = [0, 3]; // Indices of featured (taller) cards
+
+  const decorativeElements = [
+    { pos: "top-4 left-1/2 -translate-x-1/2", size: "w-24 h-24", bg: "radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%)" },
+    { pos: "top-1/3 -right-6", size: "w-16 h-16", bg: "radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%)" },
+    { pos: "bottom-1/4 -left-4", size: "w-20 h-20", bg: "radial-gradient(circle, rgba(201,169,110,0.05) 0%, transparent 70%)" },
+  ];
+
   return (
-    <section id="hizmetler" className="relative py-24 lg:py-32" style={{ backgroundColor: "#090909" }}>
+    <section id="hizmetler" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#090909" }}>
+      {/* Decorative background elements */}
+      {decorativeElements.map((el, i) => (
+        <div key={i} className={`absolute ${el.pos} ${el.size} rounded-full pointer-events-none`} style={{ background: el.bg }} />
+      ))}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <RevealText>
           <div className="flex items-start gap-6 mb-16">
@@ -700,56 +724,94 @@ function ServicesSection() {
           </div>
         </RevealText>
 
-        <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
-          {services.map((s, idx) => (
-            <motion.div
-              key={s.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + idx * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative p-6 lg:p-8 border overflow-hidden transition-all duration-500 cursor-pointer"
-              style={{
-                backgroundColor: "#121212",
-                borderColor: "rgba(255,255,255,0.06)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
-                e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              <div className="absolute top-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ background: "linear-gradient(to right, #c9a96e, #e0c68b)" }} />
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center border" style={{ borderColor: "rgba(201,169,110,0.2)", backgroundColor: "rgba(201,169,110,0.05)" }}>
-                  <s.icon className="w-6 h-6" style={{ color: "#c9a96e" }} />
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 lg:gap-6">
+          {services.map((s, idx) => {
+            const anim = cardAnimations[idx % cardAnimations.length];
+            const isFeatured = featuredCards.includes(idx);
+            return (
+              <motion.div
+                key={s.name}
+                initial={anim.initial}
+                animate={isInView ? anim.animate : anim.initial}
+                transition={{ duration: 0.6, delay: cardDelays[idx], ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="group relative p-6 lg:p-8 border overflow-hidden transition-all duration-500 cursor-pointer break-inside-avoid mb-4 lg:mb-6"
+                style={{
+                  backgroundColor: "#121212",
+                  borderColor: "rgba(255,255,255,0.06)",
+                  minHeight: isFeatured ? "340px" : "auto",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
+                  e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <div className="absolute top-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ background: "linear-gradient(to right, #c9a96e, #e0c68b)" }} />
+
+                {/* Decorative corner shape for featured cards */}
+                {isFeatured && (
+                  <div className="absolute top-0 right-0 w-20 h-20 opacity-20 pointer-events-none">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M80 0 L80 80 L0 0 Z" fill="url(#featGrad)" />
+                      <defs>
+                        <linearGradient id="featGrad" x1="80" y1="0" x2="0" y2="80">
+                          <stop offset="0%" stopColor="#c9a96e" stopOpacity="0.3" />
+                          <stop offset="100%" stopColor="#c9a96e" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                )}
+
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center border" style={{ borderColor: "rgba(201,169,110,0.2)", backgroundColor: "rgba(201,169,110,0.05)" }}>
+                    <s.icon className="w-6 h-6" style={{ color: "#c9a96e" }} />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {s.tag && (
+                      <span className="text-[10px] uppercase tracking-widest px-2 py-1 border" style={{ color: "#c9a96e", borderColor: "rgba(201,169,110,0.3)", backgroundColor: "rgba(201,169,110,0.08)" }}>
+                        {s.tag}
+                      </span>
+                    )}
+                    <span className="text-lg font-bold" style={{ color: "#c9a96e" }}>{s.price}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  {s.tag && (
-                    <span className="text-[10px] uppercase tracking-widest px-2 py-1 border" style={{ color: "#c9a96e", borderColor: "rgba(201,169,110,0.3)", backgroundColor: "rgba(201,169,110,0.08)" }}>
-                      {s.tag}
-                    </span>
-                  )}
-                  <span className="text-lg font-bold" style={{ color: "#c9a96e" }}>{s.price}</span>
+                <h3 className="text-lg font-bold uppercase mb-2 group-hover:text-[#c9a96e] transition-colors duration-300" style={{ color: "#f0f0f0" }}>
+                  {s.name}
+                </h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "#777" }}>
+                  {s.desc}
+                </p>
+
+                {/* Featured cards get extra content area */}
+                {isFeatured && (
+                  <div className="mt-2 pt-4 border-t" style={{ borderColor: "rgba(201,169,110,0.1)" }}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="flex -space-x-1">
+                        {[...Array(3)].map((_, i) => (
+                          <div key={i} className="w-5 h-5 rounded-full border-2 flex items-center justify-center" style={{ borderColor: "#121212", backgroundColor: i === 0 ? "#c9a96e" : i === 1 ? "#e0c68b" : "#a88942" }}>
+                            <span className="text-[7px] font-bold" style={{ color: "#090909" }}>★</span>
+                          </div>
+                        ))}
+                      </div>
+                      <span className="text-[10px]" style={{ color: "#c9a96e" }}>En Çok Tercih Edilen</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-2 text-xs" style={{ color: "#777" }}>
+                  <Clock className="w-3.5 h-3.5" style={{ color: "#c9a96e" }} />
+                  <span>{s.duration}</span>
+                  <Star className="w-3.5 h-3.5 ml-2" style={{ color: "#c9a96e" }} />
+                  <span>4.9</span>
                 </div>
-              </div>
-              <h3 className="text-lg font-bold uppercase mb-2 group-hover:text-[#c9a96e] transition-colors duration-300" style={{ color: "#f0f0f0" }}>
-                {s.name}
-              </h3>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#777" }}>
-                {s.desc}
-              </p>
-              <div className="flex items-center gap-2 text-xs" style={{ color: "#777" }}>
-                <Clock className="w-3.5 h-3.5" style={{ color: "#c9a96e" }} />
-                <span>{s.duration}</span>
-                <Star className="w-3.5 h-3.5 ml-2" style={{ color: "#c9a96e" }} />
-                <span>4.9</span>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1157,7 +1219,6 @@ function MarqueeSection3() {
   );
 }
 
-const galleryStyles = ["Kesim", "Sakal", "Styling", "Dönüşüm"];
 const galleryItems = [
   { src: "/gallery-1.png", alt: "Modern fade kesim", style: "Kesim" },
   { src: "/gallery-2.png", alt: "Sakal şekillendirme", style: "Sakal" },
@@ -1170,18 +1231,24 @@ const galleryItems = [
 function GallerySection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeStyle, setActiveStyle] = useState(0);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
 
-  useEffect(() => {
-    if (!isAutoPlay) return;
-    const interval = setInterval(() => {
-      setActiveStyle((prev) => (prev + 1) % galleryStyles.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isAutoPlay]);
+  const galleryAnimations = [
+    { initial: { opacity: 0, y: 60 }, animate: { opacity: 1, y: 0 } },
+    { initial: { opacity: 0, scale: 0.85 }, animate: { opacity: 1, scale: 1 } },
+    { initial: { opacity: 0, x: -40 }, animate: { opacity: 1, x: 0 } },
+    { initial: { opacity: 0, y: 30, rotateY: -5 }, animate: { opacity: 1, y: 0, rotateY: 0 } },
+    { initial: { opacity: 0, x: 40 }, animate: { opacity: 1, x: 0 } },
+    { initial: { opacity: 0, scale: 0.9, rotate: -2 }, animate: { opacity: 1, scale: 1, rotate: 0 } },
+  ];
 
-  const filtered = galleryItems.filter((item) => item.style === galleryStyles[activeStyle]);
+  const galleryHeights = [
+    "aspect-[3/4]",
+    "aspect-square",
+    "aspect-[4/5]",
+    "aspect-[3/4]",
+    "aspect-square",
+    "aspect-[4/3]",
+  ];
 
   return (
     <section id="galeri" className="relative py-24 lg:py-32" style={{ backgroundColor: "#0e0e0e" }}>
@@ -1197,73 +1264,95 @@ function GallerySection() {
         </RevealText>
 
         <RevealText delay={0.2}>
-          <div className="flex flex-col sm:flex-row gap-8">
-            <div className="flex sm:flex-col gap-2 justify-center sm:justify-start flex-shrink-0">
-              {galleryStyles.map((style, idx) => (
-                <button
-                  key={style}
-                  onClick={() => { setActiveStyle(idx); setIsAutoPlay(false); }}
-                  className={`relative px-5 py-2.5 text-sm uppercase tracking-wider transition-all duration-300 rounded-sm whitespace-nowrap ${
-                    activeStyle === idx
-                      ? "text-white shadow-[0_0_20px_rgba(201,169,110,0.3)]"
-                      : ""
-                  }`}
-                  style={
-                    activeStyle === idx
-                      ? { backgroundColor: "#c9a96e", color: "#fff" }
-                      : { color: "#777" }
-                  }
-                >
-                  {style}
-                </button>
-              ))}
-              <button
-                onClick={() => setIsAutoPlay(!isAutoPlay)}
-                className="text-xs uppercase tracking-wider mt-1 transition-colors"
-                style={{ color: isAutoPlay ? "#c9a96e" : "#777" }}
-              >
-                {isAutoPlay ? "⏸ Durdur" : "▶ Oynat"}
-              </button>
-            </div>
-
-            <div className="flex-1">
-              <AnimatePresence mode="wait">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 space-y-3">
+            {galleryItems.map((img, idx) => {
+              const anim = galleryAnimations[idx % galleryAnimations.length];
+              return (
                 <motion.div
-                  key={activeStyle}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.4 }}
-                  className="grid grid-cols-2 gap-3"
+                  key={img.src}
+                  initial={anim.initial}
+                  animate={isInView ? anim.animate : anim.initial}
+                  transition={{ duration: 0.6, delay: 0.1 + idx * 0.12, ease: "easeOut" }}
+                  className="relative overflow-hidden rounded-lg group cursor-pointer break-inside-avoid"
                 >
-                  {filtered.map((img, idx) => (
-                    <motion.div
-                      key={img.src}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: idx * 0.1 }}
-                      className={`relative overflow-hidden rounded-sm group cursor-pointer ${
-                        idx === 0 ? "row-span-2 aspect-[3/4]" : "aspect-square"
-                      }`}
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-[#090909]/0 group-hover:bg-[#090909]/50 transition-all duration-300 flex items-center justify-center">
-                        <ZoomIn className="w-10 h-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: "#c9a96e" }} />
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(to top, rgba(9,9,9,0.8), transparent)" }}>
-                        <p className="text-white text-xs uppercase tracking-wider">{img.alt}</p>
-                      </div>
-                    </motion.div>
-                  ))}
+                  <div className={galleryHeights[idx % galleryHeights.length]}>
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Overlay with category label */}
+                    <div className="absolute inset-0 bg-[#090909]/0 group-hover:bg-[#090909]/60 transition-all duration-400 flex flex-col items-center justify-center gap-3">
+                      <ZoomIn className="w-10 h-10 opacity-0 group-hover:opacity-100 transition-all duration-400 scale-50 group-hover:scale-100" style={{ color: "#c9a96e" }} />
+                      <span className="text-xs uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-4 group-hover:translate-y-0" style={{ color: "#c9a96e" }}>
+                        {img.style}
+                      </span>
+                    </div>
+                    {/* Bottom gradient with title */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-400" style={{ background: "linear-gradient(to top, rgba(9,9,9,0.9), transparent)" }}>
+                      <p className="text-white text-xs uppercase tracking-wider">{img.alt}</p>
+                    </div>
+                  </div>
                 </motion.div>
-              </AnimatePresence>
-            </div>
+              );
+            })}
           </div>
+        </RevealText>
+
+        {/* Floating Action Bar */}
+        <RevealText delay={0.5}>
+          <motion.div
+            className="flex items-center justify-center gap-4 mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201,169,110,0.4)" }}
+              whileTap={{ scale: 0.97 }}
+              className="relative px-8 py-3.5 rounded-full text-sm font-bold uppercase tracking-wider overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, #c9a96e, #e0c68b, #a88942)",
+                color: "#090909",
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <ZoomIn className="w-4 h-4" />
+                Tümünü Gör
+              </span>
+              <motion.div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(135deg, #e0c68b, #c9a96e, #e0c68b)" }}
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(225,48,108,0.3)" }}
+              whileTap={{ scale: 0.97 }}
+              className="flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-bold uppercase tracking-wider border transition-colors duration-300"
+              style={{
+                borderColor: "rgba(201,169,110,0.3)",
+                color: "#f0f0f0",
+                backgroundColor: "rgba(201,169,110,0.05)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "#c9a96e";
+                e.currentTarget.style.backgroundColor = "rgba(201,169,110,0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
+                e.currentTarget.style.backgroundColor = "rgba(201,169,110,0.05)";
+              }}
+            >
+              <Instagram className="w-4 h-4" />
+              Instagram
+            </motion.a>
+          </motion.div>
         </RevealText>
       </div>
     </section>
@@ -1368,11 +1457,9 @@ function BlogSection() {
                 <p className="text-xs leading-relaxed" style={{ color: "#777" }}>
                   {post.content}
                 </p>
-                <div className="mt-4 pt-3 border-t flex items-center justify-between" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+                <div className="mt-4 flex items-center gap-2">
+                  <User className="w-3 h-3" style={{ color: "#c9a96e" }} />
                   <span className="text-xs" style={{ color: "#777" }}>{post.author}</span>
-                  <span className="text-xs uppercase tracking-wider group-hover:text-[#c9a96e] transition-colors" style={{ color: "#555" }}>
-                    Devamı →
-                  </span>
                 </div>
               </div>
             </motion.article>
