@@ -14,26 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Slick Style - Profesyonel Berber Hizmeti",
+  title: "Canbay Kuaför - Profesyonel Berber Hizmeti",
   description:
-    "Erkekler için premium bakım deneyimi. Uzman ellerde, modern tarzda. Slick Style ile profesyonel berber hizmeti alın.",
+    "Canbay Kuaför - Pursaklar'da profesyonel berber hizmeti. Modern kesim, sakal tıraşı, cilt bakımı ve daha fazlası.",
   keywords: [
     "berber",
     "kuaför",
+    "Canbay Kuaför",
+    "Pursaklar berber",
+    "Ankara kuaför",
     "erkek bakım",
     "saç kesimi",
     "sakal tıraşı",
-    "premium berber",
-    "Slick Style",
+    "profesyonel berber",
   ],
-  authors: [{ name: "Slick Style" }],
+  authors: [{ name: "Canbay Kuaför" }],
   icons: {
-    icon: "/logo.svg",
+    icon: "/canbay-icon.png",
   },
   openGraph: {
-    title: "Slick Style - Profesyonel Berber Hizmeti",
+    title: "Canbay Kuaför - Profesyonel Berber Hizmeti",
     description:
-      "Erkekler için premium bakım deneyimi. Uzman ellerde, modern tarzda.",
+      "Canbay Kuaför - Pursaklar'da profesyonel berber hizmeti. Modern kesim, sakal tıraşı, cilt bakımı ve daha fazlası.",
     type: "website",
   },
 };
@@ -47,7 +49,7 @@ export default function RootLayout({
     <html lang="tr" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ backgroundColor: "#ffffff", color: "#111827" }}
+        style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
       >
         {children}
         <Toaster />

@@ -136,8 +136,8 @@ function MarqueeBanner({ text, speed = 30 }: { text: string; speed?: number }) {
   const repeated = Array(6).fill(text);
   return (
     <div
-      className="overflow-hidden whitespace-nowrap border-y border-[rgba(0,0,0,0.06)] py-3"
-      style={{ backgroundColor: "#f9fafb" }}
+      className="overflow-hidden whitespace-nowrap border-y border-[rgba(255,255,255,0.04)] py-3"
+      style={{ backgroundColor: "#0a0a0a" }}
     >
       <motion.div
         className="flex gap-12 w-max"
@@ -148,12 +148,12 @@ function MarqueeBanner({ text, speed = 30 }: { text: string; speed?: number }) {
           <span
             key={i}
             className="uppercase tracking-[0.3em] text-sm flex items-center gap-4"
-            style={{ color: "rgba(0,0,0,0.15)" }}
+            style={{ color: "rgba(255,255,255,0.15)" }}
           >
             <span>{t}</span>
             <Scissors
               className="w-3 h-3"
-              style={{ color: "rgba(255,107,53,0.3)" }}
+              style={{ color: "rgba(223,255,0,0.3)" }}
             />
           </span>
         ))}
@@ -211,7 +211,7 @@ function FloatingParticles() {
             top: p.top,
             width: p.size,
             height: p.size,
-            backgroundColor: "rgba(255,107,53,0.2)",
+            backgroundColor: "rgba(223,255,0,0.3)",
           }}
           animate={{
             y: [-20, -60, -30],
@@ -262,13 +262,13 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
         }
         transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
         className="block h-[2px] origin-left rounded-full"
-        style={{ backgroundColor: "#FF6B35" }}
+        style={{ backgroundColor: "#DFFF00" }}
       />
       <motion.span
         animate={isOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
         transition={{ duration: 0.25 }}
         className="block h-[2px] rounded-full"
-        style={{ width: 20, backgroundColor: "#FF6B35" }}
+        style={{ width: 20, backgroundColor: "#DFFF00" }}
       />
       <motion.span
         animate={
@@ -278,7 +278,7 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
         }
         transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
         className="block h-[2px] origin-left rounded-full ml-auto"
-        style={{ backgroundColor: "#FF6B35" }}
+        style={{ backgroundColor: "#DFFF00" }}
       />
     </div>
   );
@@ -303,6 +303,7 @@ function Navbar() {
 
   return (
     <>
+      {/* Top bar - neon orange */}
       <motion.div
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -313,22 +314,22 @@ function Navbar() {
             : "opacity-100"
         }`}
       >
-        <div style={{ backgroundColor: "#FF6B35" }} className="text-white">
+        <div style={{ backgroundColor: "#FF6B00" }} className="text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-1.5">
             <div className="flex items-center gap-4 sm:gap-6">
               <a
-                href="tel:+901234567890"
+                href="tel:+905533261747"
                 className="flex items-center gap-1.5 text-[11px] sm:text-xs tracking-wide hover:opacity-80 transition-opacity"
               >
                 <Phone className="w-3 h-3" />
-                <span>+90 123 456 78 90</span>
+                <span>0553 326 17 47</span>
               </a>
               <a
-                href="mailto:info@slickstyle.com"
+                href="mailto:info@canbaykuaför.com"
                 className="hidden sm:flex items-center gap-1.5 text-[11px] sm:text-xs tracking-wide hover:opacity-80 transition-opacity"
               >
                 <Mail className="w-3 h-3" />
-                <span>info@slickstyle.com</span>
+                <span>info@canbaykuaför.com</span>
               </a>
             </div>
             <div className="flex items-center gap-4">
@@ -355,13 +356,14 @@ function Navbar() {
         </div>
       </motion.div>
 
+      {/* Main navbar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "top-0 bg-white/85 backdrop-blur-2xl border-b border-black/[0.04] shadow-[0_1px_3px_rgba(0,0,0,0.1)]"
+            ? "top-0 bg-black/85 backdrop-blur-2xl border-b border-white/[0.04] shadow-[0_1px_3px_rgba(255,255,255,0.06)]"
             : "top-[32px] bg-transparent"
         }`}
       >
@@ -374,43 +376,21 @@ function Navbar() {
               <motion.div
                 whileHover={{ rotate: 90 }}
                 transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-                className="relative w-11 h-11 flex items-center justify-center"
+                className="relative w-11 h-11 flex items-center justify-center overflow-hidden rounded-full"
               >
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute inset-0 border-2 border-dashed rounded-full"
-                  style={{ borderColor: "rgba(255,107,53,0.4)" }}
-                />
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(to bottom right, #FF6B35, #E55A2B)",
-                    boxShadow: "0 0 20px rgba(255,107,53,0.3)",
-                  }}
-                >
-                  <Scissors
-                    className="w-4.5 h-4.5 text-white"
-                    strokeWidth={2.5}
-                  />
-                </div>
+                <Image src="/canbay-icon.png" alt="Canbay" width={44} height={44} className="object-cover" />
               </motion.div>
               <div className="flex flex-col leading-none">
                 <span
-                  className="text-lg lg:text-xl font-extrabold uppercase tracking-[0.15em] text-[#111827] group-hover:text-[#FF6B35] transition-colors duration-300"
+                  className="text-lg lg:text-xl font-extrabold uppercase tracking-[0.15em] text-white group-hover:text-[#DFFF00] transition-colors duration-300"
                 >
-                  Slick
+                  Canbay
                 </span>
                 <span
                   className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-medium -mt-0.5"
-                  style={{ color: "#FF6B35" }}
+                  style={{ color: "#DFFF00" }}
                 >
-                  S t y l e
+                  K u a f ö r
                 </span>
               </div>
               <motion.div
@@ -419,7 +399,7 @@ function Navbar() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="hidden sm:block h-[2px] ml-2"
                 style={{
-                  background: "linear-gradient(to right, #FF6B35, transparent)",
+                  background: "linear-gradient(to right, #DFFF00, transparent)",
                 }}
               />
             </a>
@@ -429,17 +409,17 @@ function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="relative px-4 py-2 text-[13px] uppercase tracking-[0.15em] font-medium hover:text-[#FF6B35] transition-colors duration-300 group"
-                  style={{ color: "#4B5563" }}
+                  className="relative px-4 py-2 text-[13px] uppercase tracking-[0.15em] font-medium hover:text-[#DFFF00] transition-colors duration-300 group"
+                  style={{ color: "#888" }}
                 >
                   <span className="relative z-10">{link.label}</span>
                   <motion.div
                     className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ backgroundColor: "rgba(255,107,53,0.1)" }}
+                    style={{ backgroundColor: "rgba(223,255,0,0.1)" }}
                   />
                   <span
                     className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] rounded-full group-hover:w-5 transition-all duration-300"
-                    style={{ backgroundColor: "#FF6B35" }}
+                    style={{ backgroundColor: "#DFFF00" }}
                   />
                 </a>
               ))}
@@ -450,9 +430,10 @@ function Navbar() {
                 href="#randevu"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="hidden sm:flex items-center gap-2 text-white font-bold uppercase tracking-[0.12em] text-[12px] px-5 py-2.5 relative overflow-hidden group"
+                className="hidden sm:flex items-center gap-2 font-bold uppercase tracking-[0.12em] text-[12px] px-5 py-2.5 relative overflow-hidden group"
                 style={{
-                  background: "linear-gradient(to right, #FF6B35, #E55A2B)",
+                  background: "linear-gradient(to right, #DFFF00, #B8D900)",
+                  color: "#000",
                 }}
               >
                 <motion.div
@@ -472,7 +453,7 @@ function Navbar() {
               <motion.button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 whileTap={{ scale: 0.9 }}
-                className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl bg-black/[0.04] border border-black/[0.06] backdrop-blur-sm"
+                className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] backdrop-blur-sm"
                 aria-label="Toggle menu"
               >
                 <HamburgerIcon isOpen={mobileOpen} />
@@ -482,6 +463,7 @@ function Navbar() {
         </div>
       </motion.nav>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -503,27 +485,20 @@ function Navbar() {
                 stiffness: 300,
               }}
               className="fixed top-0 right-0 bottom-0 z-[56] w-full max-w-md lg:hidden"
-              style={{ backgroundColor: "#ffffff" }}
+              style={{ backgroundColor: "#000000" }}
             >
               <div className="flex flex-col h-full">
                 <div
                   className="flex items-center justify-between p-6 border-b"
-                  style={{ borderColor: "rgba(0,0,0,0.06)" }}
+                  style={{ borderColor: "rgba(255,255,255,0.06)" }}
                 >
                   <div className="flex items-center gap-2">
                     <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{
-                        background:
-                          "linear-gradient(to bottom right, #FF6B35, #E55A2B)",
-                      }}
+                      className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden"
                     >
-                      <Scissors
-                        className="w-3.5 h-3.5 text-white"
-                        strokeWidth={2.5}
-                      />
+                      <Image src="/canbay-icon.png" alt="Canbay" width={32} height={32} className="object-cover" />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-[0.15em] text-[#111827]">
+                    <span className="text-sm font-bold uppercase tracking-[0.15em] text-white">
                       Menü
                     </span>
                   </div>
@@ -533,9 +508,9 @@ function Navbar() {
                     whileHover={{ rotate: 90 }}
                     transition={{ duration: 0.3 }}
                     className="w-10 h-10 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "rgba(255,107,53,0.1)" }}
+                    style={{ backgroundColor: "rgba(223,255,0,0.1)" }}
                   >
-                    <X className="w-4 h-4" style={{ color: "#FF6B35" }} />
+                    <X className="w-4 h-4" style={{ color: "#DFFF00" }} />
                   </motion.button>
                 </div>
 
@@ -547,8 +522,8 @@ function Navbar() {
                       transition={{ delay: 0.1 }}
                       className="rounded-xl p-6 mb-6 border"
                       style={{
-                        backgroundColor: "rgba(255,107,53,0.08)",
-                        borderColor: "rgba(255,107,53,0.2)",
+                        backgroundColor: "rgba(223,255,0,0.08)",
+                        borderColor: "rgba(223,255,0,0.2)",
                       }}
                     >
                       <div className="flex items-center gap-3 mb-3">
@@ -556,16 +531,16 @@ function Navbar() {
                           className="w-12 h-12 rounded-full flex items-center justify-center"
                           style={{
                             background:
-                              "linear-gradient(135deg, #FF6B35, #E55A2B)",
+                              "linear-gradient(135deg, #DFFF00, #B8D900)",
                           }}
                         >
-                          <Calendar className="w-5 h-5 text-white" />
+                          <Calendar className="w-5 h-5 text-black" />
                         </div>
                         <div>
-                          <div className="text-[#111827] font-bold text-sm uppercase tracking-wider">
+                          <div className="text-white font-bold text-sm uppercase tracking-wider">
                             Randevu Al
                           </div>
-                          <div className="text-xs" style={{ color: "#4B5563" }}>
+                          <div className="text-xs" style={{ color: "#888" }}>
                             Hemen online randevu
                           </div>
                         </div>
@@ -573,10 +548,10 @@ function Navbar() {
                       <a
                         href="#randevu"
                         onClick={() => setMobileOpen(false)}
-                        className="block w-full text-center py-3 rounded-lg font-bold uppercase tracking-wider text-sm text-white"
+                        className="block w-full text-center py-3 rounded-lg font-bold uppercase tracking-wider text-sm text-black"
                         style={{
                           background:
-                            "linear-gradient(to right, #FF6B35, #E55A2B)",
+                            "linear-gradient(to right, #DFFF00, #B8D900)",
                         }}
                       >
                         Hemen Rezerve Et
@@ -597,33 +572,33 @@ function Navbar() {
                           duration: 0.4,
                           ease: [0.25, 0.46, 0.45, 0.94],
                         }}
-                        className="group flex items-center gap-4 p-4 rounded-xl hover:bg-black/[0.03] transition-all duration-300"
+                        className="group flex items-center gap-4 p-4 rounded-xl hover:bg-white/[0.03] transition-all duration-300"
                       >
                         <div
                           className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 border"
                           style={{
-                            borderColor: "rgba(0,0,0,0.06)",
-                            backgroundColor: "rgba(0,0,0,0.02)",
+                            borderColor: "rgba(255,255,255,0.06)",
+                            backgroundColor: "rgba(255,255,255,0.02)",
                           }}
                         >
                           <link.icon
                             className="w-5 h-5"
-                            style={{ color: "#FF6B35" }}
+                            style={{ color: "#DFFF00" }}
                           />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div
-                            className="font-semibold uppercase tracking-[0.08em] text-[#111827] group-hover:text-[#FF6B35] transition-colors text-sm"
+                            className="font-semibold uppercase tracking-[0.08em] text-white group-hover:text-[#DFFF00] transition-colors text-sm"
                           >
                             {link.label}
                           </div>
-                          <div className="text-xs truncate" style={{ color: "#4B5563" }}>
+                          <div className="text-xs truncate" style={{ color: "#888" }}>
                             {link.desc}
                           </div>
                         </div>
                         <ChevronRight
                           className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                          style={{ color: "#FF6B35" }}
+                          style={{ color: "#DFFF00" }}
                         />
                       </motion.a>
                     ))}
@@ -632,29 +607,29 @@ function Navbar() {
 
                 <div
                   className="p-6 border-t"
-                  style={{ borderColor: "rgba(0,0,0,0.06)" }}
+                  style={{ borderColor: "rgba(255,255,255,0.06)" }}
                 >
                   <div className="flex items-center justify-center gap-4">
                     <a
                       href="#"
-                      className="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/10 transition-all duration-300"
-                      style={{ borderColor: "rgba(0,0,0,0.08)" }}
+                      className="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#DFFF00]/50 hover:bg-[#DFFF00]/10 transition-all duration-300"
+                      style={{ borderColor: "rgba(255,255,255,0.08)" }}
                     >
-                      <Instagram className="w-4 h-4" style={{ color: "#4B5563" }} />
+                      <Instagram className="w-4 h-4" style={{ color: "#888" }} />
                     </a>
                     <a
                       href="#"
-                      className="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/10 transition-all duration-300"
-                      style={{ borderColor: "rgba(0,0,0,0.08)" }}
+                      className="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#DFFF00]/50 hover:bg-[#DFFF00]/10 transition-all duration-300"
+                      style={{ borderColor: "rgba(255,255,255,0.08)" }}
                     >
-                      <Facebook className="w-4 h-4" style={{ color: "#4B5563" }} />
+                      <Facebook className="w-4 h-4" style={{ color: "#888" }} />
                     </a>
                     <a
-                      href="tel:+901234567890"
-                      className="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/10 transition-all duration-300"
-                      style={{ borderColor: "rgba(0,0,0,0.08)" }}
+                      href="tel:+905533261747"
+                      className="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#DFFF00]/50 hover:bg-[#DFFF00]/10 transition-all duration-300"
+                      style={{ borderColor: "rgba(255,255,255,0.08)" }}
                     >
-                      <Phone className="w-4 h-4" style={{ color: "#4B5563" }} />
+                      <Phone className="w-4 h-4" style={{ color: "#888" }} />
                     </a>
                   </div>
                 </div>
@@ -670,7 +645,7 @@ function Navbar() {
 // ===== Hero Section =====
 
 const heroStats = [
-  { value: 15, suffix: "+", label: "Yıl Deneyim" },
+  { value: 9, suffix: "+", label: "Yıl Deneyim" },
   { value: 10000, suffix: "+", label: "Mutlu Müşteri" },
   { value: 5, suffix: "", label: "Uzman Berber" },
   { value: 49, suffix: "", label: "Puan (x10)", isDecimal: true },
@@ -686,13 +661,13 @@ function HeroSection() {
     <section
       id="anasayfa"
       className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ backgroundColor: "#ffffff" }}
+      style={{ backgroundColor: "#000000" }}
     >
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(255,107,53,0.05) 0%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(223,255,0,0.05) 0%, transparent 70%)",
         }}
       />
       <FloatingParticles />
@@ -711,11 +686,11 @@ function HeroSection() {
                 animate={{ width: 60 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="h-[2px]"
-                style={{ backgroundColor: "#FF6B35" }}
+                style={{ backgroundColor: "#DFFF00" }}
               />
               <span
                 className="uppercase tracking-[0.3em] text-sm font-medium"
-                style={{ color: "#22C55E" }}
+                style={{ color: "#DFFF00" }}
               >
                 Hoş Geldiniz
               </span>
@@ -723,9 +698,9 @@ function HeroSection() {
 
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase leading-tight mb-6"
-              style={{ color: "#111827" }}
+              style={{ color: "#FFFFFF" }}
             >
-              {"Profesyonel Berber Hizmeti"
+              {"Pursaklar'ın En İyi Kuaförü"
                 .split("")
                 .map((char, idx) => (
                   <motion.span
@@ -741,12 +716,13 @@ function HeroSection() {
                       char === " " ? { width: "0.3em" } : {}
                     }
                   >
-                    {char === "B" ||
-                    char === "H" ||
-                    char === "i" ||
-                    char === "m" ||
-                    char === "e" ? (
-                      <span className="text-gradient-gold">{char}</span>
+                    {char === "P" ||
+                    char === "E" ||
+                    char === "K" ||
+                    char === "u" ||
+                    char === "ö" ||
+                    char === "ü" ? (
+                      <span className="text-gradient-neon">{char}</span>
                     ) : (
                       char
                     )}
@@ -759,10 +735,10 @@ function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
               className="text-lg lg:text-xl mb-8 max-w-lg leading-relaxed"
-              style={{ color: "#4B5563" }}
+              style={{ color: "#BBBBBB" }}
             >
-              Erkekler için premium bakım deneyimi. Uzman ellerde, modern
-              tarzda.
+              Profesyonel berber hizmeti. Uzman ellerde, modern tarzda.
+              Canbay Kuaför farkıyla.
             </motion.p>
 
             <motion.div
@@ -806,8 +782,8 @@ function HeroSection() {
                 }}
               >
                 <Image
-                  src="/barber-hero.png"
-                  alt="Profesyonel berber"
+                  src="/canbay-hero.png"
+                  alt="Canbay Kuaför"
                   fill
                   className="object-cover"
                   priority
@@ -824,27 +800,28 @@ function HeroSection() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.2, type: "spring" }}
-                className="absolute -bottom-4 -left-4 text-white p-4 rounded-sm"
-                style={{ backgroundColor: "#22C55E" }}
+                className="absolute -bottom-4 -left-4 text-black p-4 rounded-sm"
+                style={{ backgroundColor: "#DFFF00" }}
               >
-                <div className="text-2xl font-bold">15+</div>
+                <div className="text-2xl font-bold">2016+</div>
                 <div className="text-xs uppercase tracking-wider">
                   Yıl Deneyim
                 </div>
               </motion.div>
               <div
                 className="absolute top-4 left-4 w-20 h-20 border-t-2 border-l-2 rounded-tl-sm"
-                style={{ borderColor: "rgba(255,107,53,0.4)" }}
+                style={{ borderColor: "rgba(223,255,0,0.4)" }}
               />
               <div
                 className="absolute bottom-4 right-4 w-20 h-20 border-b-2 border-r-2 rounded-br-sm"
-                style={{ borderColor: "rgba(255,107,53,0.4)" }}
+                style={{ borderColor: "rgba(223,255,0,0.4)" }}
               />
             </motion.div>
           </motion.div>
         </div>
       </div>
 
+      {/* Stats bar */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -854,8 +831,8 @@ function HeroSection() {
         <div
           className="grid grid-cols-4 border-t"
           style={{
-            borderColor: "rgba(0,0,0,0.06)",
-            backgroundColor: "rgba(255,255,255,0.9)",
+            borderColor: "rgba(255,255,255,0.06)",
+            backgroundColor: "rgba(0,0,0,0.9)",
             backdropFilter: "blur(20px)",
           }}
         >
@@ -863,11 +840,11 @@ function HeroSection() {
             <div
               key={stat.label}
               className={`text-center py-5 border-r ${idx === 3 ? "border-r-0" : ""}`}
-              style={{ borderColor: "rgba(0,0,0,0.06)" }}
+              style={{ borderColor: "rgba(255,255,255,0.06)" }}
             >
               <div
                 className="text-xl sm:text-2xl font-bold"
-                style={{ color: "#FF6B35" }}
+                style={{ color: "#DFFF00" }}
               >
                 {stat.isDecimal ? (
                   "4.9"
@@ -880,7 +857,7 @@ function HeroSection() {
               </div>
               <div
                 className="text-[10px] sm:text-xs uppercase tracking-wider mt-1"
-                style={{ color: "#4B5563" }}
+                style={{ color: "#888" }}
               >
                 {stat.label}
               </div>
@@ -895,7 +872,7 @@ function HeroSection() {
 function MarqueeSection1() {
   return (
     <MarqueeBanner
-      text="SLICK STYLE • PROFESYONEL BERBER • PREMIUM BAKIM • MODERN TARZ • ERKEK GROOMING •"
+      text="CANBAY KUAFÖR • PROFESYONEL BERBER • MODERN TARZ • ERKEK BAKIM • PURSAKLAR •"
       speed={25}
     />
   );
@@ -910,9 +887,9 @@ const services = [
     desc: "Modern fade, klasik kesim ve özel tasarım teknikleri ile yüz hatlarınıza en uygun saç modelini birlikte belirliyoruz.",
     duration: "45 dk",
     tag: "En Popüler",
-    image: "/gallery-1.png",
+    image: "/canbay-interior-1.png",
     detailDesc:
-      "Modern fade, klasik kesim ve özel tasarım teknikleri ile yüz hatlarınıza en uygun saç modelini birlikte belirliyoruz. Uzman berberlerimiz son trendleri takip ederek size benzersiz bir stil yaratır. Her kesim öncesi detaylı danışma ile beklentilerinizi netleştiriyoruz.",
+      "Modern fade, klasik kesim ve özel tasarım teknikleri ile yüz hatlarınıza en uygun saç modelini birlikte belirliyoruz. Uzman berberlerimiz son trendleri takip ederek size benzersiz bir stil yaratır.",
   },
   {
     icon: Crown,
@@ -920,9 +897,9 @@ const services = [
     desc: "Sakalınızın doğal formunu koruyarak, profesyonel araçlar ve tekniklerle düzgün, bakımlı bir görünüm sağlıyoruz.",
     duration: "30 dk",
     tag: "",
-    image: "/gallery-2.png",
+    image: "/canbay-interior-2.png",
     detailDesc:
-      "Sakalınızın doğal formunu koruyarak, profesyonel araçlar ve tekniklerle düzgün, bakımlı bir görünüm sağlıyoruz. Sakal şekillendirme, düzeltme ve bakım işlemleri ile istediğiniz tarza kavuşmanızı hedefliyoruz.",
+      "Sakalınızın doğal formunu koruyarak, profesyonel araçlar ve tekniklerle düzgün, bakımlı bir görünüm sağlıyoruz.",
   },
   {
     icon: Sparkles,
@@ -930,9 +907,9 @@ const services = [
     desc: "Derin temizlik, nemlendirme ve canlandırma işlemlerini kapsayan profesyonel cilt bakımı.",
     duration: "60 dk",
     tag: "Premium",
-    image: "/gallery-3.png",
+    image: "/canbay-interior-3.png",
     detailDesc:
-      "Derin temizlik, nemlendirme ve canlandırma işlemlerini kapsayan profesyonel cilt bakımı. Cilt tipinize özel ürünler ve teknikler ile sağlıklı, parlak bir cilde kavuşun. Peeling, maske ve serum uygulamaları dahildir.",
+      "Derin temizlik, nemlendirme ve canlandırma işlemlerini kapsayan profesyonel cilt bakımı. Cilt tipinize özel ürünler ve teknikler.",
   },
   {
     icon: Flame,
@@ -940,9 +917,9 @@ const services = [
     desc: "Saç tipinize uygun profesyonel şekillendirme ürünleri ve teknikleriyle gün boyu kalıcı stiller oluşturuyoruz.",
     duration: "30 dk",
     tag: "",
-    image: "/gallery-4.png",
+    image: "/canbay-exterior-1.png",
     detailDesc:
-      "Saç tipinize uygun profesyonel şekillendirme ürünleri ve teknikleriyle gün boyu kalıcı stiller oluşturuyoruz. Pomade, wax ve mat şekillendiriciler ile size özel bir görünüm kazandırıyoruz.",
+      "Saç tipinize uygun profesyonel şekillendirme ürünleri ve teknikleriyle gün boyu kalıcı stiller oluşturuyoruz.",
   },
   {
     icon: Droplets,
@@ -950,9 +927,9 @@ const services = [
     desc: "Keratin bakımı, protein tedavisi ve saç derisi masajı ile saç sağlığınızı içten dışa destekliyoruz.",
     duration: "50 dk",
     tag: "Yeni",
-    image: "/gallery-5.png",
+    image: "/canbay-exterior-2.png",
     detailDesc:
-      "Keratin bakımı, protein tedavisi ve saç derisi masajı ile saç sağlığınızı içten dışa destekliyoruz. Saç dökülmesi, kırılganlık ve matlık sorunlarına profesyonel çözümler sunuyoruz.",
+      "Keratin bakımı, protein tedavisi ve saç derisi masajı ile saç sağlığınızı içten dışa destekliyoruz.",
   },
   {
     icon: Gem,
@@ -960,19 +937,19 @@ const services = [
     desc: "Geleneksel ustura ile sıcak havlu uygulaması. Otantik berber ritüeli yaşayın.",
     duration: "40 dk",
     tag: "",
-    image: "/products.png",
+    image: "/canbay-logo.png",
     detailDesc:
-      "Geleneksel ustura ile sıcak havlu uygulaması. Otantik berber ritüeli yaşayın. Sıcak köpük, premium ustura ve yatıştırıcı after-shave ile unutulmaz bir deneyim.",
+      "Geleneksel ustura ile sıcak havlu uygulaması. Otantik berber ritüeli yaşayın.",
   },
   {
     icon: Brush,
     name: "Ağda Bakımı",
-    desc: "Profesyonel ağda uygulaması ile pürüzsüz ve temiz bir cilt elde edin. Yüz ve boyun bölgesi dahil.",
+    desc: "Profesyonel ağda uygulaması ile pürüzsüz ve temiz bir cilt elde edin.",
     duration: "30 dk",
     tag: "",
-    image: "/about.png",
+    image: "/canbay-interior-2.png",
     detailDesc:
-      "Profesyonel ağda uygulaması ile pürüzsüz ve temiz bir cilt elde edin. Yüz ve boyun bölgesi dahil, hijyenik ve konforlu uygulama. Hassas ciltler için özel fomüller kullanılır.",
+      "Profesyonel ağda uygulaması ile pürüzsüz ve temiz bir cilt elde edin. Yüz ve boyun bölgesi dahil.",
   },
   {
     icon: Zap,
@@ -980,36 +957,9 @@ const services = [
     desc: "Skin fade, taper fade ve drop fade gibi modern kesim teknikleri ile trend bir görünüm.",
     duration: "50 dk",
     tag: "Trend",
-    image: "/barber-hero.png",
+    image: "/canbay-hero.png",
     detailDesc:
-      "Skin fade, taper fade ve drop fade gibi modern kesim teknikleri ile trend bir görünüm. Farklı fade seviyeleri ve kombinasyonları ile size özel bir stil oluşturuyoruz.",
-  },
-];
-
-const experienceCards = [
-  {
-    icon: <Crown className="w-8 h-8" style={{ color: "#FF6B35" }} />,
-    title: "VIP Bakım",
-    desc: "Kraliyet tadında premium bakım deneyimi. Özel aromaterapi ve masaj dahil.",
-    image: "/gallery-1.png",
-  },
-  {
-    icon: <Sparkles className="w-8 h-8" style={{ color: "#FF6B35" }} />,
-    title: "Ayrıcalıklı Hizmet",
-    desc: "Özel tasarım hizmetlerimiz. Kişiye özel saç ve sakal planlaması.",
-    image: "/gallery-2.png",
-  },
-  {
-    icon: <Gem className="w-8 h-8" style={{ color: "#FF6B35" }} />,
-    title: "Premium Paket",
-    desc: "En kaliteli ürünlerle kapsamlı bakım. Saç + Sakal + Cilt bakımı bir arada.",
-    image: "/gallery-3.png",
-  },
-  {
-    icon: <Flame className="w-8 h-8" style={{ color: "#FF6B35" }} />,
-    title: "Grooming Set",
-    desc: "Profesyonel erkek bakım seti. Tam korunma ve bakım deneyimi.",
-    image: "/gallery-4.png",
+      "Skin fade, taper fade ve drop fade gibi modern kesim teknikleri ile trend bir görünüm.",
   },
 ];
 
@@ -1066,7 +1016,7 @@ function ServicesSection() {
     <section
       id="hizmetler"
       className="relative py-24 lg:py-32"
-      style={{ backgroundColor: "#ffffff" }}
+      style={{ backgroundColor: "#000000" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <RevealText>
@@ -1074,12 +1024,12 @@ function ServicesSection() {
             <div className="hidden lg:flex flex-col items-center">
               <div
                 className="w-[2px] h-20"
-                style={{ backgroundColor: "#22C55E" }}
+                style={{ backgroundColor: "#FF6B00" }}
               />
               <span
                 className="text-[10px] font-bold tracking-[0.4em] uppercase mt-3"
                 style={{
-                  color: "#22C55E",
+                  color: "#FF6B00",
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
                 }}
@@ -1088,25 +1038,25 @@ function ServicesSection() {
               </span>
               <div
                 className="w-[2px] flex-1 mt-3"
-                style={{ backgroundColor: "rgba(255,107,53,0.2)" }}
+                style={{ backgroundColor: "rgba(255,107,0,0.2)" }}
               />
             </div>
             <div>
               <span
                 className="uppercase tracking-[0.3em] text-sm font-medium"
-                style={{ color: "#22C55E" }}
+                style={{ color: "#FF6B00" }}
               >
                 Ne Yapıyoruz
               </span>
               <h2
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-                style={{ color: "#111827" }}
+                style={{ color: "#FFFFFF" }}
               >
                 Hizmetlerimiz
               </h2>
               <p
                 className="text-lg max-w-md"
-                style={{ color: "#4B5563" }}
+                style={{ color: "#BBBBBB" }}
               >
                 Erkek Bakımının En İyileri
               </p>
@@ -1145,25 +1095,25 @@ function ServicesSection() {
                 whileHover={{ scale: 1.03, y: -4 }}
                 className="group relative border overflow-hidden transition-all duration-500 cursor-pointer"
                 style={{
-                  backgroundColor: "#f3f4f6",
-                  borderColor: "rgba(0,0,0,0.06)",
+                  backgroundColor: "#111111",
+                  borderColor: "rgba(255,255,255,0.06)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor =
-                    "rgba(255,107,53,0.3)";
+                    "rgba(255,107,0,0.3)";
                   e.currentTarget.style.boxShadow =
-                    "0 0 25px rgba(255,107,53,0.1)";
+                    "0 0 25px rgba(255,107,0,0.1)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor =
-                    "rgba(0,0,0,0.06)";
+                    "rgba(255,255,255,0.06)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 <div
                   className="absolute top-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
                   style={{
-                    background: "linear-gradient(to right, #FF6B35, #FF8C5A)",
+                    background: "linear-gradient(to right, #FF6B00, #FF8C3A)",
                   }}
                 />
 
@@ -1178,7 +1128,7 @@ function ServicesSection() {
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(0,0,0,0.2), transparent 60%)",
+                        "linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%)",
                     }}
                   />
                   <div className="absolute top-2 right-2">
@@ -1186,8 +1136,8 @@ function ServicesSection() {
                       <span
                         className="text-[9px] uppercase tracking-widest px-2 py-0.5 font-bold"
                         style={{
-                          color: "#111827",
-                          backgroundColor: "#FBBF24",
+                          color: "#000",
+                          backgroundColor: "#DFFF00",
                         }}
                       >
                         {s.tag}
@@ -1201,38 +1151,37 @@ function ServicesSection() {
                     <div
                       className="w-8 h-8 rounded-lg flex items-center justify-center"
                       style={{
-                        backgroundColor: "rgba(34,197,94,0.1)",
+                        backgroundColor: "rgba(255,107,0,0.1)",
                       }}
                     >
                       <s.icon
                         className="w-4 h-4"
-                        style={{ color: "#22C55E" }}
+                        style={{ color: "#FF6B00" }}
                       />
                     </div>
                     <h3
-                      className="text-sm sm:text-base font-bold uppercase group-hover:text-[#FF6B35] transition-colors duration-300 leading-tight text-[#111827]"
-                      style={{ color: "#111827" }}
+                      className="text-sm sm:text-base font-bold uppercase group-hover:text-[#FF6B00] transition-colors duration-300 leading-tight text-white"
                     >
                       {s.name}
                     </h3>
                   </div>
                   <p
                     className="text-xs leading-relaxed mb-3 line-clamp-2"
-                    style={{ color: "#4B5563" }}
+                    style={{ color: "#888" }}
                   >
                     {s.desc}
                   </p>
 
-                  {/* Detayları Gör button with glowing pulse */}
+                  {/* Detayları Gör button */}
                   <motion.button
                     onClick={() =>
                       setExpandedIdx(isExpanded ? -1 : idx)
                     }
                     className="w-full py-2 rounded-md text-[11px] sm:text-xs uppercase tracking-wider font-bold relative overflow-hidden cursor-pointer"
                     style={{
-                      backgroundColor: "rgba(255,107,53,0.12)",
-                      color: "#FF6B35",
-                      border: "1px solid rgba(255,107,53,0.2)",
+                      backgroundColor: "rgba(255,107,0,0.12)",
+                      color: "#FF6B00",
+                      border: "1px solid rgba(255,107,0,0.2)",
                     }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -1240,9 +1189,9 @@ function ServicesSection() {
                       className="absolute inset-0 rounded-md"
                       animate={{
                         boxShadow: [
-                          "0 0 0 0 rgba(201,169,110,0)",
-                          "0 0 18px 3px rgba(201,169,110,0.25)",
-                          "0 0 0 0 rgba(201,169,110,0)",
+                          "0 0 0 0 rgba(255,107,0,0)",
+                          "0 0 18px 3px rgba(255,107,0,0.25)",
+                          "0 0 0 0 rgba(255,107,0,0)",
                         ],
                       }}
                       transition={{
@@ -1281,24 +1230,24 @@ function ServicesSection() {
                           className="pt-3 mt-3 border-t"
                           style={{
                             borderColor:
-                              "rgba(255,107,53,0.15)",
+                              "rgba(255,107,0,0.15)",
                           }}
                         >
                           <p
                             className="text-xs leading-relaxed"
-                            style={{ color: "#4B5563" }}
+                            style={{ color: "#BBBBBB" }}
                           >
                             {s.detailDesc}
                           </p>
                           <div
                             className="flex items-center gap-3 mt-3 text-[10px] sm:text-xs"
-                            style={{ color: "#4B5563" }}
+                            style={{ color: "#BBBBBB" }}
                           >
                             <span className="flex items-center gap-1">
                               <Clock
                                 className="w-3 h-3"
                                 style={{
-                                  color: "#FF6B35",
+                                  color: "#FF6B00",
                                 }}
                               />
                               {s.duration}
@@ -1307,7 +1256,7 @@ function ServicesSection() {
                               <Star
                                 className="w-3 h-3"
                                 style={{
-                                  color: "#FF6B35",
+                                  color: "#FF6B00",
                                 }}
                               />
                               4.9
@@ -1316,7 +1265,7 @@ function ServicesSection() {
                           <a
                             href="#randevu"
                             className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-bold mt-2"
-                            style={{ color: "#22C55E" }}
+                            style={{ color: "#DFFF00" }}
                           >
                             Randevu Al{" "}
                             <ChevronRight className="w-3 h-3" />
@@ -1331,7 +1280,7 @@ function ServicesSection() {
           })}
         </div>
 
-        {/* ===== Promotional Banner (replaces Premium Paketler) ===== */}
+        {/* Promo Banner */}
         <div className="mt-16" ref={promoRef}>
           <div
             className="relative overflow-hidden"
@@ -1344,11 +1293,11 @@ function ServicesSection() {
               className="relative py-14 sm:py-20 px-6 sm:px-12 lg:px-20"
               style={{
                 background:
-                  "linear-gradient(135deg, #DC2626 0%, #EF4444 25%, #FBBF24 50%, #EF4444 75%, #DC2626 100%)",
+                  "linear-gradient(135deg, #FF6B00 0%, #DFFF00 50%, #FF6B00 100%)",
                 backgroundSize: "200% 200%",
               }}
             >
-              {/* Animated diagonal stripes overlay */}
+              {/* Animated diagonal stripes */}
               <motion.div
                 className="absolute inset-0 opacity-[0.12]"
                 animate={{ backgroundPosition: ["0 0", "80px 80px"] }}
@@ -1363,7 +1312,6 @@ function ServicesSection() {
                   backgroundSize: "80px 80px",
                 }}
               />
-              {/* Second stripe layer - opposite direction */}
               <motion.div
                 className="absolute inset-0 opacity-[0.06]"
                 animate={{
@@ -1380,9 +1328,7 @@ function ServicesSection() {
                   backgroundSize: "60px 60px",
                 }}
               />
-              {/* Floating sparkles */}
               <PromoSparkles />
-              {/* Geometric corner accents */}
               <div
                 className="absolute top-0 left-0 w-32 h-32"
                 style={{
@@ -1398,7 +1344,6 @@ function ServicesSection() {
                 }}
               />
 
-              {/* Content */}
               <div className="relative z-10 text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -1439,9 +1384,9 @@ function ServicesSection() {
                 <motion.div
                   className="text-4xl sm:text-5xl lg:text-6xl xl:text-8xl font-black mb-5"
                   style={{
-                    color: "#FEF3C7",
+                    color: "#000000",
                     textShadow:
-                      "0 0 40px rgba(254,243,199,0.4), 0 0 80px rgba(254,243,199,0.2), 2px 4px 12px rgba(0,0,0,0.5)",
+                      "0 0 40px rgba(0,0,0,0.2), 2px 4px 12px rgba(0,0,0,0.3)",
                   }}
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={
@@ -1460,7 +1405,7 @@ function ServicesSection() {
                 </motion.div>
 
                 <motion.p
-                  className="text-white/90 mb-8 max-w-xl mx-auto text-sm sm:text-base leading-relaxed"
+                  className="text-black/80 mb-8 max-w-xl mx-auto text-sm sm:text-base leading-relaxed font-medium"
                   initial={{ opacity: 0 }}
                   animate={
                     isPromoInView ? { opacity: 1 } : {}
@@ -1470,7 +1415,7 @@ function ServicesSection() {
                     delay: 0.5,
                   }}
                 >
-                  Slick Style&apos;a hoş geldiniz! İlk randevunuza özel{" "}
+                  Canbay Kuaför&apos;e hoş geldiniz! İlk randevunuza özel{" "}
                   <strong>%50 indirim</strong> fırsatını kaçırmayın.
                   Sınırlı süre!
                 </motion.p>
@@ -1483,7 +1428,7 @@ function ServicesSection() {
                       "0 0 40px rgba(255,255,255,0.3)",
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-block bg-white text-[#DC2626] font-black uppercase tracking-[0.15em] text-sm sm:text-base px-10 py-4 rounded-sm shadow-2xl transition-all duration-300"
+                  className="inline-block bg-white text-[#FF6B00] font-black uppercase tracking-[0.15em] text-sm sm:text-base px-10 py-4 rounded-sm shadow-2xl transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   animate={
                     isPromoInView
@@ -1515,10 +1460,10 @@ function MarqueeSection2() {
   );
 }
 
-// ===== About Section (Redesigned) =====
+// ===== About Section =====
 
 const stats = [
-  { value: 15, suffix: "+", label: "Yıl Deneyim" },
+  { value: 9, suffix: "+", label: "Yıl Deneyim" },
   { value: 10000, suffix: "+", label: "Müşteri" },
   { value: 5, suffix: "", label: "Uzman Berber" },
   { value: 49, suffix: "", label: "Puan (x10)", isDecimal: true },
@@ -1526,23 +1471,23 @@ const stats = [
 
 const timelineItems = [
   {
-    year: "2010",
+    year: "2016",
     title: "Kuruluş",
-    desc: "Slick Style ilk kez kapılarını açtı ve İstanbul'da berber severlerle buluştu.",
+    desc: "Canbay Kuaför ilk kez kapılarını açtı ve Pursaklar'da berber severlerle buluştu.",
     icon: Award,
     animType: "slideLeft",
   },
   {
-    year: "2015",
-    title: "İlk Şube",
-    desc: "Kadıköy'deki ana şubemizden sonra ikinci noktamızı da açtık.",
+    year: "2018",
+    title: "Büyüme",
+    desc: "Müşteri memnuniyeti ile hızla büyüdük, ekibimize yeni ustalar katıldı.",
     icon: MapPin,
     animType: "scaleUp",
   },
   {
-    year: "2020",
-    title: "Premium Yenilenme",
-    desc: "Hizmet konseptimizi premium seviyeye taşıdık, tamamen yenilendik.",
+    year: "2021",
+    title: "Yenilenme",
+    desc: "İç mekanımızı tamamen yeniledik, modern ekipmanlara geçtik.",
     icon: Crown,
     animType: "fadeRotate",
   },
@@ -1624,39 +1569,39 @@ function AboutSection() {
   return (
     <section
       className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ backgroundColor: "#f9fafb" }}
+      style={{ backgroundColor: "#0a0a0a" }}
     >
-      {/* Subtle barber stripe background pattern */}
+      {/* Barber stripe background */}
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(90deg, #FF6B35 0px, #FF6B35 1px, transparent 1px, transparent 30px)",
+            "repeating-linear-gradient(90deg, #DFFF00 0px, #DFFF00 1px, transparent 1px, transparent 30px)",
         }}
       />
 
       {/* Floating decorative elements */}
       <motion.div
         className="absolute top-20 left-[5%] w-24 h-[2px] pointer-events-none"
-        style={{ backgroundColor: "rgba(255,107,53,0.15)" }}
+        style={{ backgroundColor: "rgba(223,255,0,0.15)" }}
         animate={{ opacity: [0.3, 0.7, 0.3], scaleX: [1, 1.3, 1] }}
         transition={{ duration: 4, repeat: Infinity }}
       />
       <motion.div
         className="absolute bottom-32 right-[8%] w-16 h-16 rounded-full border pointer-events-none"
-        style={{ borderColor: "rgba(255,107,53,0.1)" }}
+        style={{ borderColor: "rgba(223,255,0,0.1)" }}
         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 5, repeat: Infinity }}
       />
       <motion.div
         className="absolute top-1/2 right-[3%] w-[2px] h-20 pointer-events-none"
-        style={{ backgroundColor: "rgba(255,107,53,0.1)" }}
+        style={{ backgroundColor: "rgba(223,255,0,0.1)" }}
         animate={{ scaleY: [1, 1.4, 1], opacity: [0.2, 0.5, 0.2] }}
         transition={{ duration: 3.5, repeat: Infinity }}
       />
       <motion.div
         className="absolute top-40 right-[20%] w-3 h-3 rounded-full pointer-events-none"
-        style={{ backgroundColor: "rgba(255,107,53,0.2)" }}
+        style={{ backgroundColor: "rgba(223,255,0,0.2)" }}
         animate={{ y: [0, -15, 0], opacity: [0.3, 0.8, 0.3] }}
         transition={{ duration: 3, repeat: Infinity }}
       />
@@ -1669,20 +1614,20 @@ function AboutSection() {
           <div className="text-center mb-16">
             <span
               className="uppercase tracking-[0.3em] text-sm font-medium"
-              style={{ color: "#22C55E" }}
+              style={{ color: "#DFFF00" }}
             >
               Hakkımızda
             </span>
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-              style={{ color: "#111827" }}
+              style={{ color: "#FFFFFF" }}
             >
-              Slick Style <span className="text-gradient-gold">Hakkında</span>
+              Canbay <span className="text-gradient-neon">Kuaför</span>
             </h2>
           </div>
         </RevealText>
 
-        {/* Split layout with diagonal clip-path image */}
+        {/* Split layout with image */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           <RevealText>
             <div className="relative">
@@ -1695,7 +1640,7 @@ function AboutSection() {
                 }
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="absolute top-0 left-0 border-t-2 border-l-2 rounded-tl-sm z-20"
-                style={{ borderColor: "#22C55E" }}
+                style={{ borderColor: "#DFFF00" }}
               />
               <div
                 className="relative w-full aspect-[4/5] overflow-hidden"
@@ -1705,8 +1650,8 @@ function AboutSection() {
                 }}
               >
                 <Image
-                  src="/about.png"
-                  alt="Barbershop"
+                  src="/canbay-interior-2.png"
+                  alt="Canbay Kuaför"
                   fill
                   className="object-cover"
                 />
@@ -1714,14 +1659,13 @@ function AboutSection() {
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(to top, rgba(0,0,0,0.1), transparent 50%)",
+                      "linear-gradient(to top, rgba(0,0,0,0.3), transparent 50%)",
                   }}
                 />
               </div>
-              {/* Decorative accent */}
               <div
                 className="absolute -bottom-3 -right-3 w-20 h-20 border-b-2 border-r-2 rounded-br-sm z-20"
-                style={{ borderColor: "rgba(255,107,53,0.4)" }}
+                style={{ borderColor: "rgba(223,255,0,0.4)" }}
               />
             </div>
           </RevealText>
@@ -1730,21 +1674,21 @@ function AboutSection() {
             <div className="relative">
               <div
                 className="absolute -left-6 top-0 w-1 h-20 hidden lg:block"
-                style={{ backgroundColor: "#22C55E" }}
+                style={{ backgroundColor: "#DFFF00" }}
               />
               <p
                 className="text-base lg:text-lg leading-relaxed mb-6"
-                style={{ color: "#4B5563" }}
+                style={{ color: "#BBBBBB" }}
               >
-                Slick Style, 15 yılı aşkın deneyimiyle erkekler için
-                premium berber hizmeti sunan lider bir kuruluştur. Modern
+                Canbay Kuaför, 2016&rsquo;dan beri Pursaklar&rsquo;da
+                profesyonel berber hizmeti sunan lider bir kuruluştur. Modern
                 teknikler ve geleneksel ustalığın mükemmel birleşimini
                 sağlayan ekibimiz, her müşteriye özel bir deneyim
                 sunmayı hedeflemektedir.
               </p>
               <p
                 className="text-base lg:text-lg leading-relaxed mb-6"
-                style={{ color: "#4B5563" }}
+                style={{ color: "#BBBBBB" }}
               >
                 Kalite standartlarımızı sürekli yükselterek, sektörde
                 yenilikçi yaklaşımımızla fark yaratıyoruz. Müşteri
@@ -1754,7 +1698,7 @@ function AboutSection() {
               <a
                 href="#randevu"
                 className="inline-flex items-center gap-2 text-sm uppercase tracking-wider font-bold transition-colors duration-300 hover:opacity-80"
-                style={{ color: "#22C55E" }}
+                style={{ color: "#DFFF00" }}
               >
                 Daha Fazla Bilgi{" "}
                 <ChevronRight className="w-4 h-4" />
@@ -1768,24 +1712,23 @@ function AboutSection() {
           <RevealText className="text-center mb-12">
             <span
               className="uppercase tracking-[0.3em] text-sm font-medium"
-              style={{ color: "#22C55E" }}
+              style={{ color: "#DFFF00" }}
             >
               Yolculuğumuz
             </span>
             <h3
               className="text-2xl sm:text-3xl font-bold uppercase mt-2"
-              style={{ color: "#111827" }}
+              style={{ color: "#FFFFFF" }}
             >
               Tarihçemiz
             </h3>
           </RevealText>
 
           <div className="relative max-w-3xl mx-auto">
-            {/* Vertical line */}
             <motion.div
               className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-[2px]"
               style={{
-                backgroundColor: "rgba(34,197,94,0.2)",
+                backgroundColor: "rgba(223,255,0,0.2)",
               }}
               initial={{ height: 0 }}
               animate={
@@ -1810,7 +1753,6 @@ function AboutSection() {
                         : "sm:flex-row-reverse"
                     }`}
                   >
-                    {/* Content */}
                     <div
                       className={`flex-1 ml-12 sm:ml-0 ${
                         isLeft
@@ -1821,26 +1763,25 @@ function AboutSection() {
                       <motion.div {...anim}>
                         <div
                           className="text-xs uppercase tracking-[0.2em] mb-1 font-bold"
-                          style={{ color: "#22C55E" }}
+                          style={{ color: "#DFFF00" }}
                         >
                           {item.year}
                         </div>
                         <h4
                           className="text-lg font-bold uppercase mb-1"
-                          style={{ color: "#111827" }}
+                          style={{ color: "#FFFFFF" }}
                         >
                           {item.title}
                         </h4>
                         <p
                           className="text-sm leading-relaxed"
-                          style={{ color: "#4B5563" }}
+                          style={{ color: "#888" }}
                         >
                           {item.desc}
                         </p>
                       </motion.div>
                     </div>
 
-                    {/* Center dot */}
                     <motion.div
                       className="absolute left-4 sm:left-1/2 -translate-x-1/2 z-10"
                       initial={{ scale: 0 }}
@@ -1859,16 +1800,15 @@ function AboutSection() {
                         className="w-8 h-8 rounded-full flex items-center justify-center"
                         style={{
                           background:
-                            "linear-gradient(135deg, #22C55E, #16A34A)",
+                            "linear-gradient(135deg, #DFFF00, #B8D900)",
                           boxShadow:
-                            "0 0 15px rgba(34,197,94,0.3)",
+                            "0 0 15px rgba(223,255,0,0.3)",
                         }}
                       >
-                        <item.icon className="w-4 h-4 text-white" />
+                        <item.icon className="w-4 h-4 text-black" />
                       </div>
                     </motion.div>
 
-                    {/* Spacer for opposite side */}
                     <div className="hidden sm:block flex-1" />
                   </div>
                 );
@@ -1877,12 +1817,12 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* Horizontal Scrolling Stats Bar */}
+        {/* Stats Bar */}
         <div className="mt-20" ref={statsRef}>
           <RevealText className="text-center mb-6">
             <span
               className="uppercase tracking-[0.3em] text-xs font-medium"
-              style={{ color: "#22C55E" }}
+              style={{ color: "#DFFF00" }}
             >
               Rakamlarla Biz
             </span>
@@ -1904,13 +1844,13 @@ function AboutSection() {
                   }}
                   className="flex-shrink-0 px-8 sm:px-12 py-6 border text-center min-w-[160px] sm:min-w-[180px]"
                   style={{
-                    backgroundColor: "#ffffff",
-                    borderColor: "rgba(34,197,94,0.15)",
+                    backgroundColor: "#111111",
+                    borderColor: "rgba(223,255,0,0.15)",
                   }}
                 >
                   <div
                     className="text-3xl sm:text-4xl font-bold mb-1"
-                    style={{ color: "#22C55E" }}
+                    style={{ color: "#DFFF00" }}
                   >
                     {stat.isDecimal ? (
                       <span>4.9</span>
@@ -1923,7 +1863,7 @@ function AboutSection() {
                   </div>
                   <div
                     className="text-xs uppercase tracking-wider"
-                    style={{ color: "#4B5563" }}
+                    style={{ color: "#888" }}
                   >
                     {stat.label}
                   </div>
@@ -1942,30 +1882,30 @@ function AboutSection() {
 const products = [
   {
     name: "Sakal Yağı",
-    desc: "Doğal argan yağı ile besleyici sakal yağı. Sakal köklerini güçlendirir, yumuşaklık ve parlaklık kazandırır.",
-    price: "$25",
-    image: "/product-1.png",
+    desc: "Doğal argan yağı ile besleyici sakal yağı. Sakal köklerini güçlendirir.",
+    price: "₺150",
+    image: "/canbay-interior-1.png",
     tag: "Çok Satan",
   },
   {
     name: "Saç Şekillendirme Kremi",
     desc: "Profesyonel mat görünüm sağlayan şekillendirme kremi. Gün boyu kalıcı tutuş.",
-    price: "$18",
-    image: "/product-2.png",
+    price: "₺120",
+    image: "/canbay-interior-3.png",
     tag: "",
   },
   {
     name: "Tıraş Sonrası Losyon",
     desc: "Yatıştırıcı ve ferahlatıcı etki. Aloe vera ve mentol içeren formül.",
-    price: "$22",
-    image: "/product-3.png",
+    price: "₺130",
+    image: "/canbay-exterior-1.png",
     tag: "Yeni",
   },
   {
     name: "Premium Şampuan",
     desc: "Derin temizlik ve saç derisi bakımı. Doğal aktif maddelerle formüle edilmiş.",
-    price: "$20",
-    image: "/product-4.png",
+    price: "₺110",
+    image: "/canbay-interior-2.png",
     tag: "",
   },
 ];
@@ -1978,7 +1918,7 @@ function ProductsSection() {
     <section
       id="urunler"
       className="relative py-24 lg:py-32"
-      style={{ backgroundColor: "#ffffff" }}
+      style={{ backgroundColor: "#000000" }}
     >
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -1987,13 +1927,13 @@ function ProductsSection() {
         <RevealText className="text-center mb-16">
           <span
             className="uppercase tracking-[0.3em] text-sm font-medium"
-            style={{ color: "#FBBF24" }}
+            style={{ color: "#FF6B00" }}
           >
             Ürünlerimiz
           </span>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-            style={{ color: "#111827" }}
+            style={{ color: "#FFFFFF" }}
           >
             Bakım Ürünleri
           </h2>
@@ -2001,23 +1941,23 @@ function ProductsSection() {
             <div
               className="h-[1px] w-12"
               style={{
-                backgroundColor: "rgba(251,191,36,0.3)",
+                backgroundColor: "rgba(255,107,0,0.3)",
               }}
             />
             <div
               className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: "#FBBF24" }}
+              style={{ backgroundColor: "#FF6B00" }}
             />
             <div
               className="h-[1px] w-12"
               style={{
-                backgroundColor: "rgba(251,191,36,0.3)",
+                backgroundColor: "rgba(255,107,0,0.3)",
               }}
             />
           </div>
           <p
             className="text-lg max-w-md mx-auto"
-            style={{ color: "#4B5563" }}
+            style={{ color: "#BBBBBB" }}
           >
             Premium Kalite
           </p>
@@ -2033,16 +1973,16 @@ function ProductsSection() {
               animate={isInView ? "visible" : "hidden"}
               className="group flex gap-5 border p-4 transition-all duration-500 cursor-pointer overflow-hidden"
               style={{
-                backgroundColor: "#f3f4f6",
-                borderColor: "rgba(0,0,0,0.06)",
+                backgroundColor: "#111111",
+                borderColor: "rgba(255,255,255,0.06)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor =
-                  "rgba(251,191,36,0.3)";
+                  "rgba(255,107,0,0.3)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor =
-                  "rgba(0,0,0,0.06)";
+                  "rgba(255,255,255,0.06)";
               }}
             >
               <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-sm">
@@ -2055,7 +1995,7 @@ function ProductsSection() {
                 {product.tag && (
                   <div
                     className="absolute top-2 left-2 text-white text-[9px] uppercase tracking-widest px-2 py-0.5 font-medium"
-                    style={{ backgroundColor: "#22C55E" }}
+                    style={{ backgroundColor: "#FF6B00" }}
                   >
                     {product.tag}
                   </div>
@@ -2063,27 +2003,26 @@ function ProductsSection() {
               </div>
               <div className="flex flex-col justify-center flex-1 min-w-0">
                 <h3
-                  className="text-base font-bold uppercase mb-1 group-hover:text-[#FBBF24] transition-colors duration-300 truncate"
-                  style={{ color: "#111827" }}
+                  className="text-base font-bold uppercase mb-1 group-hover:text-[#FF6B00] transition-colors duration-300 truncate text-white"
                 >
                   {product.name}
                 </h3>
                 <p
                   className="text-xs leading-relaxed mb-3 line-clamp-2"
-                  style={{ color: "#4B5563" }}
+                  style={{ color: "#888" }}
                 >
                   {product.desc}
                 </p>
                 <div className="flex items-center justify-between">
                   <span
                     className="text-xl font-bold"
-                    style={{ color: "#FBBF24" }}
+                    style={{ color: "#DFFF00" }}
                   >
                     {product.price}
                   </span>
                   <ChevronRight
                     className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ color: "#FBBF24" }}
+                    style={{ color: "#FF6B00" }}
                   />
                 </div>
               </div>
@@ -2098,7 +2037,7 @@ function ProductsSection() {
 function MarqueeSection3() {
   return (
     <MarqueeBanner
-      text="★ 4.9 PUAN ★ 10.000+ MUTLU MÜŞTERİ ★ 15+ YIL DENEYİM ★ PREMIUM KALITE ★"
+      text="★ 4.9 PUAN ★ 10.000+ MUTLU MÜŞTERİ ★ 2016'DAN BERİ ★ PROFESYONEL KALITE ★"
       speed={20}
     />
   );
@@ -2107,12 +2046,12 @@ function MarqueeSection3() {
 // ===== Gallery Section =====
 
 const galleryItems = [
-  { src: "/gallery-1.png", alt: "Modern fade kesim", title: "Fade Master", category: "Kesim", desc: "Skin fade tekniği ile modern ve keskin görünüm" },
-  { src: "/gallery-2.png", alt: "Sakal şekillendirme", title: "Beard Sculpt", category: "Sakal", desc: "Doğal formunu koruyarak profesyonel sakal tasarımı" },
-  { src: "/gallery-3.png", alt: "Klasik tıraş", title: "Classic Cut", category: "Styling", desc: "Zamansız klasik tarz, modern dokunuşlarla" },
-  { src: "/gallery-4.png", alt: "Dönüşüm öncesi", title: "Transformation", category: "Dönüşüm", desc: "Baştan sona tam stil dönüşümü" },
-  { src: "/gallery-5.png", alt: "Saç modeli", title: "Texture Crop", category: "Kesim", desc: "Dokulu ve hacimli modern saç modeli" },
-  { src: "/products.png", alt: "Styling çalışması", title: "Style Edit", category: "Styling", desc: "Profesyonel şekillendirme ve styling" },
+  { src: "/canbay-interior-1.png", alt: "Canbay Kuaför iç mekan", title: "Modern İç Mekan", category: "Mekan", desc: "Şık ve modern iç mekan tasarımımız" },
+  { src: "/canbay-exterior-1.png", alt: "Canbay Kuaför dış cephe", title: "Dış Cephe", category: "Mekan", desc: "İstiklal Caddesi üzerindeki şık mağazamız" },
+  { src: "/canbay-interior-2.png", alt: "Canbay Kuaför geniş görünüm", title: "Geniş Alan", category: "Mekan", desc: "Konforlu ve ferah çalışma alanlarımız" },
+  { src: "/canbay-exterior-2.png", alt: "Canbay Kuaför gece görünüm", title: "Gece Görünüm", category: "Mekan", desc: "Gece aydınlatması ile göz alıcı cephe" },
+  { src: "/canbay-interior-3.png", alt: "Canbay Kuaför çalışma alanı", title: "Çalışma Alanı", category: "Hizmet", desc: "Profesyonel ekipman ve uzman kadromuz" },
+  { src: "/canbay-logo.png", alt: "Canbay Kuaför logo", title: "Canbay Marka", category: "Marka", desc: "2016'dan beri Pursaklar'ın güvenilir kuaförü" },
 ];
 
 function GallerySection() {
@@ -2135,16 +2074,16 @@ function GallerySection() {
   };
 
   return (
-    <section id="galeri" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(255,107,53,0.04) 0%, transparent 60%)" }} />
+    <section id="galeri" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#0a0a0a" }}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(223,255,0,0.04) 0%, transparent 60%)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <RevealText className="text-center mb-12">
-          <span className="uppercase tracking-[0.3em] text-sm font-medium" style={{ color: "#FF6B35" }}>Portfolyo</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4" style={{ color: "#111827" }}>
-            Dönüşüm <span className="text-gradient-gold">Galerisi</span>
+          <span className="uppercase tracking-[0.3em] text-sm font-medium" style={{ color: "#DFFF00" }}>Portfolyo</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4" style={{ color: "#FFFFFF" }}>
+            Dönüşüm <span className="text-gradient-neon">Galerisi</span>
           </h2>
-          <p className="text-sm max-w-md mx-auto" style={{ color: "#6B7280" }}>Her kesim bir sanat eseridir</p>
+          <p className="text-sm max-w-md mx-auto" style={{ color: "#555" }}>Her kesim bir sanat eseridir</p>
         </RevealText>
 
         <RevealText delay={0.2}>
@@ -2161,7 +2100,7 @@ function GallerySection() {
                     className="absolute inset-0"
                   >
                     <Image src={galleryItems[activeIdx].src} alt={galleryItems[activeIdx].alt} fill className="object-cover" />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.4) 0%, transparent 50%, rgba(0,0,0,0.2) 100%)" }} />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.5) 0%, transparent 50%, rgba(0,0,0,0.2) 100%)" }} />
                   </motion.div>
                 </AnimatePresence>
                 <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10">
@@ -2173,21 +2112,21 @@ function GallerySection() {
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.4, delay: 0.15 }}
                     >
-                      <span className="inline-block text-[10px] uppercase tracking-[0.2em] px-3 py-1 mb-3 font-bold" style={{ backgroundColor: "rgba(255,107,53,0.1)", color: "#FF6B35", border: "1px solid rgba(255,107,53,0.3)" }}>
+                      <span className="inline-block text-[10px] uppercase tracking-[0.2em] px-3 py-1 mb-3 font-bold" style={{ backgroundColor: "rgba(223,255,0,0.1)", color: "#DFFF00", border: "1px solid rgba(223,255,0,0.3)" }}>
                         {galleryItems[activeIdx].category}
                       </span>
                       <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase text-white mb-2">{galleryItems[activeIdx].title}</h3>
-                      <p className="text-sm max-w-md" style={{ color: "rgba(17,24,39,0.7)" }}>{galleryItems[activeIdx].desc}</p>
+                      <p className="text-sm max-w-md" style={{ color: "rgba(255,255,255,0.7)" }}>{galleryItems[activeIdx].desc}</p>
                     </motion.div>
                   </AnimatePresence>
                 </div>
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: isAutoPlay ? "#FF6B35" : "#9CA3AF" }} />
-                  <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: isAutoPlay ? "#FF6B35" : "#9CA3AF" }}>
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: isAutoPlay ? "#DFFF00" : "#555" }} />
+                  <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: isAutoPlay ? "#DFFF00" : "#555" }}>
                     {isAutoPlay ? "OTOMATIK" : "MANUEL"}
                   </span>
                 </div>
-                <button onClick={() => setIsAutoPlay(!isAutoPlay)} className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center border backdrop-blur-md transition-colors" style={{ borderColor: "rgba(0,0,0,0.1)", backgroundColor: "rgba(0,0,0,0.5)" }}>
+                <button onClick={() => setIsAutoPlay(!isAutoPlay)} className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center border backdrop-blur-md transition-colors" style={{ borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(0,0,0,0.5)" }}>
                   {isAutoPlay ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white" />}
                 </button>
               </div>
@@ -2200,32 +2139,32 @@ function GallerySection() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className={`relative flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 lg:w-full lg:h-20 overflow-hidden transition-all duration-300 border-2 ${
-                      activeIdx === idx ? "border-[#FF6B35] shadow-[0_0_20px_rgba(255,107,53,0.3)]" : "border-transparent opacity-50 hover:opacity-80"
+                      activeIdx === idx ? "border-[#DFFF00] shadow-[0_0_20px_rgba(223,255,0,0.3)]" : "border-transparent opacity-50 hover:opacity-80"
                     }`}
                     style={{ clipPath: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
                   >
                     <Image src={item.src} alt={item.alt} fill className="object-cover" />
-                    <div className="absolute inset-0" style={{ background: activeIdx === idx ? "rgba(255,107,53,0.15)" : "rgba(0,0,0,0.3)" }} />
+                    <div className="absolute inset-0" style={{ background: activeIdx === idx ? "rgba(223,255,0,0.15)" : "rgba(0,0,0,0.3)" }} />
                     <div className="absolute bottom-1 left-2 lg:bottom-1.5 lg:left-3">
                       <span className="text-[9px] lg:text-[10px] uppercase tracking-wider font-bold text-white block leading-tight">{item.title}</span>
                     </div>
-                    <div className={`absolute top-1 right-1 lg:top-1.5 lg:right-2 w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full transition-colors ${activeIdx === idx ? "bg-[#FF6B35]" : "bg-white/30"}`} />
+                    <div className={`absolute top-1 right-1 lg:top-1.5 lg:right-2 w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full transition-colors ${activeIdx === idx ? "bg-[#DFFF00]" : "bg-white/30"}`} />
                   </motion.button>
                 ))}
               </div>
             </div>
 
             <div className="flex items-center justify-center gap-4 mt-8">
-              <button onClick={() => goTo((activeIdx - 1 + galleryItems.length) % galleryItems.length)} className="w-12 h-12 border flex items-center justify-center transition-all hover:border-[#FF6B35] hover:bg-[#FF6B35]/10" style={{ borderColor: "rgba(0,0,0,0.1)" }}>
-                <ChevronRight className="w-5 h-5 rotate-180" style={{ color: "#FF6B35" }} />
+              <button onClick={() => goTo((activeIdx - 1 + galleryItems.length) % galleryItems.length)} className="w-12 h-12 border flex items-center justify-center transition-all hover:border-[#DFFF00] hover:bg-[#DFFF00]/10" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+                <ChevronRight className="w-5 h-5 rotate-180" style={{ color: "#DFFF00" }} />
               </button>
               <div className="flex gap-2">
                 {galleryItems.map((_, idx) => (
-                  <button key={idx} onClick={() => goTo(idx)} className="h-1 rounded-full transition-all duration-300" style={{ width: activeIdx === idx ? "32px" : "8px", backgroundColor: activeIdx === idx ? "#FF6B35" : "rgba(0,0,0,0.1)" }} />
+                  <button key={idx} onClick={() => goTo(idx)} className="h-1 rounded-full transition-all duration-300" style={{ width: activeIdx === idx ? "32px" : "8px", backgroundColor: activeIdx === idx ? "#DFFF00" : "rgba(255,255,255,0.1)" }} />
                 ))}
               </div>
-              <button onClick={() => goTo((activeIdx + 1) % galleryItems.length)} className="w-12 h-12 border flex items-center justify-center transition-all hover:border-[#FF6B35] hover:bg-[#FF6B35]/10" style={{ borderColor: "rgba(0,0,0,0.1)" }}>
-                <ChevronRight className="w-5 h-5" style={{ color: "#FF6B35" }} />
+              <button onClick={() => goTo((activeIdx + 1) % galleryItems.length)} className="w-12 h-12 border flex items-center justify-center transition-all hover:border-[#DFFF00] hover:bg-[#DFFF00]/10" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+                <ChevronRight className="w-5 h-5" style={{ color: "#DFFF00" }} />
               </button>
             </div>
           </div>
@@ -2239,34 +2178,34 @@ function GallerySection() {
 
 const blogPosts = [
   {
-    image: "/blog-1.png",
+    image: "/canbay-interior-1.png",
     title: "Sakal Bakımının Sırları",
     date: "15 Ocak 2024",
     category: "Bakım",
-    author: "Ahmet Usta",
+    author: "Canbay Usta",
     readTime: "5 dk",
     content:
-      "Sakal bakımı sadece düzgün bir görünüm için değil, sağlıklı sakal büyümesi için de kritik öneme sahiptir. Doğal yağlar kullanarak sakal köklerini beslemek, düzenli tıraş ile şekil vermek ve nemlendirici kremlerle yumuşaklık sağlamak temel adımlardandır.",
+      "Sakal bakımı sadece düzgün bir görünüm için değil, sağlıklı sakal büyümesi için de kritik öneme sahiptir. Doğal yağlar kullanarak sakal köklerini beslemek temel adımlardandır.",
   },
   {
-    image: "/blog-2.png",
+    image: "/canbay-exterior-1.png",
     title: "2024 Erkek Saç Trendleri",
     date: "10 Ocak 2024",
     category: "Trend",
-    author: "Mehmet Usta",
+    author: "Canbay Usta",
     readTime: "4 dk",
     content:
-      "Bu yılın en popüler saç modelleri arasında textured crop, modern mullet ve curtain bangs öne çıkıyor. Fade kesimler hâlâ çok popüler ancak daha doğal geçişli kombinasyonlar tercih ediliyor.",
+      "Bu yılın en popüler saç modelleri arasında textured crop, modern mullet ve curtain bangs öne çıkıyor.",
   },
   {
-    image: "/blog-3.png",
+    image: "/canbay-interior-3.png",
     title: "Doğru Tıraş Teknikleri",
     date: "5 Ocak 2024",
     category: "Rehber",
-    author: "Emre Usta",
+    author: "Canbay Usta",
     readTime: "6 dk",
     content:
-      "Cildinize zarar vermeden profesyonel tıraş yapmak için dikkat etmeniz gereken birkaç önemli nokta var. Öncelikle sıcak su veya havlu ile cildinizi yumuşatın.",
+      "Cildinize zarar vermeden profesyonel tıraş yapmak için dikkat etmeniz gereken birkaç önemli nokta var.",
   },
 ];
 
@@ -2278,7 +2217,7 @@ function BlogSection() {
     <section
       id="blog"
       className="relative py-24 lg:py-32"
-      style={{ backgroundColor: "#ffffff" }}
+      style={{ backgroundColor: "#000000" }}
     >
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -2289,25 +2228,25 @@ function BlogSection() {
             <div
               className="h-[1px] w-16 sm:w-24"
               style={{
-                backgroundColor: "rgba(239,68,68,0.3)",
+                backgroundColor: "rgba(255,107,0,0.3)",
               }}
             />
             <span
               className="uppercase tracking-[0.3em] text-sm font-medium"
-              style={{ color: "#EF4444" }}
+              style={{ color: "#FF6B00" }}
             >
               Blog
             </span>
             <div
               className="h-[1px] w-16 sm:w-24"
               style={{
-                backgroundColor: "rgba(239,68,68,0.3)",
+                backgroundColor: "rgba(255,107,0,0.3)",
               }}
             />
           </div>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase"
-            style={{ color: "#111827" }}
+            style={{ color: "#FFFFFF" }}
           >
             Son Yazılar
           </h2>
@@ -2324,16 +2263,16 @@ function BlogSection() {
               whileHover={{ y: -4 }}
               className="group border overflow-hidden transition-all duration-500 cursor-pointer"
               style={{
-                backgroundColor: "#f3f4f6",
-                borderColor: "rgba(0,0,0,0.06)",
+                backgroundColor: "#111111",
+                borderColor: "rgba(255,255,255,0.06)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor =
-                  "rgba(239,68,68,0.2)";
+                  "rgba(255,107,0,0.2)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor =
-                  "rgba(0,0,0,0.06)";
+                  "rgba(255,255,255,0.06)";
               }}
             >
               <div className="p-5">
@@ -2350,21 +2289,20 @@ function BlogSection() {
                     <span
                       className="text-[9px] uppercase tracking-widest px-2 py-0.5 border font-medium"
                       style={{
-                        color: "#EF4444",
-                        borderColor: "rgba(239,68,68,0.3)",
+                        color: "#FF6B00",
+                        borderColor: "rgba(255,107,0,0.3)",
                       }}
                     >
                       {post.category}
                     </span>
                     <h3
-                      className="text-sm sm:text-base font-bold uppercase mt-2 mb-1 group-hover:text-[#EF4444] transition-colors duration-300 leading-tight"
-                      style={{ color: "#111827" }}
+                      className="text-sm sm:text-base font-bold uppercase mt-2 mb-1 group-hover:text-[#FF6B00] transition-colors duration-300 leading-tight text-white"
                     >
                       {post.title}
                     </h3>
                     <div
                       className="flex items-center gap-3 text-[10px]"
-                      style={{ color: "#4B5563" }}
+                      style={{ color: "#888" }}
                     >
                       <span className="flex items-center gap-1">
                         <Calendar className="w-2.5 h-2.5" />{" "}
@@ -2379,7 +2317,7 @@ function BlogSection() {
                 </div>
                 <p
                   className="text-xs leading-relaxed"
-                  style={{ color: "#4B5563" }}
+                  style={{ color: "#888" }}
                 >
                   {post.content}
                 </p>
@@ -2387,18 +2325,18 @@ function BlogSection() {
                   className="mt-4 pt-3 border-t flex items-center justify-between"
                   style={{
                     borderColor:
-                      "rgba(0,0,0,0.04)",
+                      "rgba(255,255,255,0.04)",
                   }}
                 >
                   <span
                     className="text-xs"
-                    style={{ color: "#4B5563" }}
+                    style={{ color: "#888" }}
                   >
                     {post.author}
                   </span>
                   <span
-                    className="text-xs uppercase tracking-wider group-hover:text-[#EF4444] transition-colors"
-                    style={{ color: "#6B7280" }}
+                    className="text-xs uppercase tracking-wider group-hover:text-[#FF6B00] transition-colors"
+                    style={{ color: "#555" }}
                   >
                     Devamı →
                   </span>
@@ -2416,12 +2354,12 @@ function BlogSection() {
 
 const testimonials = [
   {
-    text: "Slick Style'da aldığım hizmet gerçekten mükemmeldi. Berberler çok uzman ve ilgililer. Kesinlikle tavsiye ederim!",
+    text: "Canbay Kuaför'da aldığım hizmet gerçekten mükemmeldi. Berberler çok uzman ve ilgililer. Kesinlikle tavsiye ederim!",
     name: "Ahmet Yılmaz",
     role: "Müşteri",
   },
   {
-    text: "10 yıldır düzenli müşterisiyim. Hiç bir zaman hayal kırıklığına uğramadım.",
+    text: "Yıllardır düzenli müşterisiyim. Hiç bir zaman hayal kırıklığına uğramadım.",
     name: "Mehmet Kaya",
     role: "Sadık Müşteri",
   },
@@ -2456,7 +2394,7 @@ function TestimonialsSection() {
   return (
     <section
       className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ backgroundColor: "#f9fafb" }}
+      style={{ backgroundColor: "#0a0a0a" }}
     >
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -2465,23 +2403,23 @@ function TestimonialsSection() {
         <RevealText className="text-center mb-16">
           <span
             className="uppercase tracking-[0.3em] text-sm font-medium"
-            style={{ color: "#FBBF24" }}
+            style={{ color: "#DFFF00" }}
           >
             Yorumlar
           </span>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-            style={{ color: "#111827" }}
+            style={{ color: "#FFFFFF" }}
           >
             Müşteri Yorumları
           </h2>
           <div
             className="w-20 h-1 mx-auto"
-            style={{ backgroundColor: "#FBBF24" }}
+            style={{ backgroundColor: "#DFFF00" }}
           />
           <p
             className="mt-4 text-sm flex items-center justify-center gap-2"
-            style={{ color: "#4B5563" }}
+            style={{ color: "#888" }}
           >
             <Pause className="w-3.5 h-3.5" />
             Durdurmak için bir karta tıklayın
@@ -2494,14 +2432,14 @@ function TestimonialsSection() {
           className="absolute left-0 top-0 bottom-0 w-20 z-10"
           style={{
             background:
-              "linear-gradient(to right, #f9fafb, transparent)",
+              "linear-gradient(to right, #0a0a0a, transparent)",
           }}
         />
         <div
           className="absolute right-0 top-0 bottom-0 w-20 z-10"
           style={{
             background:
-              "linear-gradient(to left, #f9fafb, transparent)",
+              "linear-gradient(to left, #0a0a0a, transparent)",
           }}
         />
         <div className="overflow-hidden">
@@ -2523,20 +2461,20 @@ function TestimonialsSection() {
                 animate={isInView ? "visible" : "hidden"}
                 className="w-[340px] sm:w-[400px] flex-shrink-0 border p-6 rounded-xl transition-colors duration-300"
                 style={{
-                  backgroundColor: "#f3f4f6",
+                  backgroundColor: "#111111",
                   borderColor:
-                    "rgba(0,0,0,0.06)",
+                    "rgba(255,255,255,0.06)",
                 }}
               >
                 <Quote
                   className="w-8 h-8 mb-4"
                   style={{
-                    color: "rgba(251,191,36,0.3)",
+                    color: "rgba(223,255,0,0.3)",
                   }}
                 />
                 <p
                   className="text-sm leading-relaxed mb-6"
-                  style={{ color: "#4B5563" }}
+                  style={{ color: "#888" }}
                 >
                   &ldquo;{t.text}&rdquo;
                 </p>
@@ -2546,8 +2484,8 @@ function TestimonialsSection() {
                       key={i}
                       className="w-4 h-4"
                       style={{
-                        fill: "#FBBF24",
-                        color: "#FBBF24",
+                        fill: "#DFFF00",
+                        color: "#DFFF00",
                       }}
                     />
                   ))}
@@ -2555,13 +2493,13 @@ function TestimonialsSection() {
                 <div>
                   <p
                     className="font-bold text-sm"
-                    style={{ color: "#111827" }}
+                    style={{ color: "#FFFFFF" }}
                   >
                     {t.name}
                   </p>
                   <p
                     className="text-xs"
-                    style={{ color: "#4B5563" }}
+                    style={{ color: "#888" }}
                   >
                     {t.role}
                   </p>
@@ -2578,7 +2516,7 @@ function TestimonialsSection() {
 function MarqueeSection4() {
   return (
     <MarqueeBanner
-      text="WHATSAPP İLE RANDEVU • HEMEN ARAYIN • ONLINE SİPARİŞ • GMAIL İLETİŞİM •"
+      text="WHATSAPP İLE RANDEVU • HEMEN ARAYIN • ONLINE SİPARİŞ • E-POSTA İLETİŞİM •"
       speed={22}
     />
   );
@@ -2615,43 +2553,43 @@ function AppointmentSection() {
   const whatsappMessage = encodeURIComponent(
     `Merhaba, randevu almak istiyorum.\nAd: ${formData.name || "..."}\nTelefon: ${formData.phone || "..."}\nHizmet: ${formData.service || "..."}\nTarih: ${formData.date || "..."}\nSaat: ${formData.time || "..."}`
   );
-  const gmailSubject = encodeURIComponent("Randevu Talebi - Slick Style");
+  const gmailSubject = encodeURIComponent("Randevu Talebi - Canbay Kuaför");
   const gmailBody = encodeURIComponent(
-    `Merhaba Slick Style Ekibi,\n\nRandevu almak istiyorum:\n\nAd Soyad: ${formData.name || "..."}\nTelefon: ${formData.phone || "..."}\nHizmet: ${formData.service || "..."}\nTarih: ${formData.date || "..."}\nSaat: ${formData.time || "..."}\nNot: ${formData.note || "..."}\n\nTeşekkürler!`
+    `Merhaba Canbay Kuaför Ekibi,\n\nRandevu almak istiyorum:\n\nAd Soyad: ${formData.name || "..."}\nTelefon: ${formData.phone || "..."}\nHizmet: ${formData.service || "..."}\nTarih: ${formData.date || "..."}\nSaat: ${formData.time || "..."}\nNot: ${formData.note || "..."}\n\nTeşekkürler!`
   );
 
-  const inputClass = "w-full border text-[#111827] px-4 py-3 text-sm transition-all placeholder:text-[#9CA3AF] focus:border-[#22C55E]";
-  const inputStyle = { backgroundColor: "rgba(0,0,0,0.02)", borderColor: "rgba(0,0,0,0.08)" };
+  const inputClass = "w-full border text-white px-4 py-3 text-sm transition-all placeholder:text-[#555] focus:border-[#DFFF00]";
+  const inputStyle = { backgroundColor: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" };
 
   return (
-    <section id="randevu" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+    <section id="randevu" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#000000" }}>
       <div className="absolute inset-0 barber-stripe opacity-[0.02]" />
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,107,53,0.3), transparent)" }} />
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,107,53,0.3), transparent)" }} />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent)" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent)" }} />
 
-      <div className="absolute top-20 right-[5%] w-64 h-64 rounded-full opacity-[0.04]" style={{ background: "radial-gradient(circle, #22C55E, transparent 70%)" }} />
-      <div className="absolute bottom-20 left-[5%] w-48 h-48 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #22C55E, transparent 70%)" }} />
+      <div className="absolute top-20 right-[5%] w-64 h-64 rounded-full opacity-[0.04]" style={{ background: "radial-gradient(circle, #DFFF00, transparent 70%)" }} />
+      <div className="absolute bottom-20 left-[5%] w-48 h-48 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #DFFF00, transparent 70%)" }} />
 
       <motion.div animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="absolute -top-20 -right-20 opacity-[0.02]">
-        <Scissors className="w-60 h-60" style={{ color: "rgba(34,197,94,0.2)" }} />
+        <Scissors className="w-60 h-60" style={{ color: "rgba(223,255,0,0.15)" }} />
       </motion.div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         <RevealText className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 border" style={{ borderColor: "rgba(34,197,94,0.2)", backgroundColor: "rgba(34,197,94,0.05)" }}>
-            <Calendar className="w-4 h-4" style={{ color: "#22C55E" }} />
-            <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: "#22C55E" }}>Randevu Sistemi</span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 border" style={{ borderColor: "rgba(255,107,0,0.2)", backgroundColor: "rgba(255,107,0,0.05)" }}>
+            <Calendar className="w-4 h-4" style={{ color: "#FF6B00" }} />
+            <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: "#FF6B00" }}>Randevu Sistemi</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-4" style={{ color: "#111827" }}>
-            Online <span className="text-gradient-gold">Randevu</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-4" style={{ color: "#FFFFFF" }}>
+            Online <span className="text-gradient-neon">Randevu</span>
           </h2>
-          <p className="text-sm max-w-lg mx-auto" style={{ color: "#6B7280" }}>3 kolay adımda randevunuzu oluşturun</p>
+          <p className="text-sm max-w-lg mx-auto" style={{ color: "#555" }}>3 kolay adımda randevunuzu oluşturun</p>
         </RevealText>
 
         <div className="grid lg:grid-cols-[1fr_320px] gap-8 items-start">
           <RevealText delay={0.2}>
-            <motion.div className="relative border overflow-hidden" style={{ borderColor: "rgba(34,197,94,0.12)", backgroundColor: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }}>
-              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(to right, transparent, #22C55E, transparent)" }} />
+            <motion.div className="relative border overflow-hidden" style={{ borderColor: "rgba(255,107,0,0.12)", backgroundColor: "rgba(17,17,17,0.9)", backdropFilter: "blur(20px)" }}>
+              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(to right, transparent, #FF6B00, transparent)" }} />
 
               <div className="p-6 lg:p-8">
                 <div className="flex items-center justify-between mb-8">
@@ -2661,27 +2599,27 @@ function AppointmentSection() {
                         animate={{ scale: step === s ? [1, 1.15, 1] : 1 }}
                         transition={{ duration: 0.4, repeat: step === s ? 2 : 0 }}
                         className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-500 ${
-                          step > s ? "text-white" : step === s ? "text-white" : ""
+                          step > s ? "text-black" : step === s ? "text-black" : ""
                         }`}
                         style={step >= s
-                          ? { background: "linear-gradient(135deg, #22C55E, #16A34A)", boxShadow: step === s ? "0 0 20px rgba(34,197,94,0.4)" : "none" }
-                          : { backgroundColor: "rgba(0,0,0,0.05)", color: "#6B7280", border: "1px solid rgba(0,0,0,0.1)" }
+                          ? { background: "linear-gradient(135deg, #FF6B00, #E55E00)", boxShadow: step === s ? "0 0 20px rgba(255,107,0,0.4)" : "none" }
+                          : { backgroundColor: "rgba(255,255,255,0.05)", color: "#555", border: "1px solid rgba(255,255,255,0.1)" }
                         }
                       >
                         {step > s ? "✓" : s}
                       </motion.div>
                       {s < 3 && (
-                        <div className="w-16 sm:w-24 lg:w-32 h-[2px] mx-2" style={{ backgroundColor: step > s ? "#22C55E" : "rgba(0,0,0,0.06)", transition: "background-color 0.5s" }} />
+                        <div className="w-16 sm:w-24 lg:w-32 h-[2px] mx-2" style={{ backgroundColor: step > s ? "#FF6B00" : "rgba(255,255,255,0.06)", transition: "background-color 0.5s" }} />
                       )}
                     </div>
                   ))}
                 </div>
 
                 <div className="flex items-center gap-2 mb-6">
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold px-2 py-0.5" style={{ backgroundColor: "rgba(34,197,94,0.15)", color: "#22C55E" }}>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold px-2 py-0.5" style={{ backgroundColor: "rgba(255,107,0,0.15)", color: "#FF6B00" }}>
                     Adım {step}/3
                   </span>
-                  <span className="text-xs font-medium" style={{ color: "#4B5563" }}>
+                  <span className="text-xs font-medium" style={{ color: "#888" }}>
                     {step === 1 ? "Kişisel Bilgiler" : step === 2 ? "Hizmet Seçimi" : "Tarih & Saat"}
                   </span>
                 </div>
@@ -2691,20 +2629,20 @@ function AppointmentSection() {
                     {step === 1 && (
                       <div className="space-y-5">
                         <div>
-                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#6B7280" }}>
-                            <User className="w-3 h-3 inline mr-1" style={{ color: "#22C55E" }} /> Ad Soyad
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                            <User className="w-3 h-3 inline mr-1" style={{ color: "#FF6B00" }} /> Ad Soyad
                           </label>
                           <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Adınızı girin" className={inputClass} style={inputStyle} />
                         </div>
                         <div>
-                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#6B7280" }}>
-                            <Phone className="w-3 h-3 inline mr-1" style={{ color: "#22C55E" }} /> Telefon
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                            <Phone className="w-3 h-3 inline mr-1" style={{ color: "#FF6B00" }} /> Telefon
                           </label>
                           <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="05XX XXX XX XX" className={inputClass} style={inputStyle} />
                         </div>
                         <div>
-                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#6B7280" }}>
-                            <MessageSquare className="w-3 h-3 inline mr-1" style={{ color: "#22C55E" }} /> Not (İsteğe Bağlı)
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                            <MessageSquare className="w-3 h-3 inline mr-1" style={{ color: "#FF6B00" }} /> Not (İsteğe Bağlı)
                           </label>
                           <textarea value={formData.note} onChange={(e) => setFormData({ ...formData, note: e.target.value })} placeholder="Özel isteklerinizi belirtin..." rows={2} className={`${inputClass} resize-none`} style={inputStyle} />
                         </div>
@@ -2713,8 +2651,8 @@ function AppointmentSection() {
                     {step === 2 && (
                       <div className="space-y-4">
                         <div>
-                          <label className="text-[10px] uppercase tracking-[0.15em] mb-3 block font-bold" style={{ color: "#6B7280" }}>
-                            <Scissors className="w-3 h-3 inline mr-1" style={{ color: "#22C55E" }} /> Hizmet Seçin
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-3 block font-bold" style={{ color: "#555" }}>
+                            <Scissors className="w-3 h-3 inline mr-1" style={{ color: "#FF6B00" }} /> Hizmet Seçin
                           </label>
                           <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto custom-scrollbar pr-1">
                             {services.map((s) => (
@@ -2724,18 +2662,18 @@ function AppointmentSection() {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setFormData({ ...formData, service: s.name })}
-                                className={`p-3 border text-left transition-all duration-300 ${formData.service === s.name ? "border-[#22C55E]" : ""}`}
+                                className={`p-3 border text-left transition-all duration-300 ${formData.service === s.name ? "border-[#FF6B00]" : ""}`}
                                 style={{
-                                  backgroundColor: formData.service === s.name ? "rgba(34,197,94,0.08)" : "rgba(0,0,0,0.02)",
-                                  borderColor: formData.service === s.name ? "rgba(34,197,94,0.4)" : "rgba(0,0,0,0.06)",
-                                  boxShadow: formData.service === s.name ? "0 0 15px rgba(34,197,94,0.1)" : "none",
+                                  backgroundColor: formData.service === s.name ? "rgba(255,107,0,0.08)" : "rgba(255,255,255,0.02)",
+                                  borderColor: formData.service === s.name ? "rgba(255,107,0,0.4)" : "rgba(255,255,255,0.06)",
+                                  boxShadow: formData.service === s.name ? "0 0 15px rgba(255,107,0,0.1)" : "none",
                                 }}
                               >
                                 <div className="flex items-center gap-2 mb-1">
-                                  <s.icon className="w-3.5 h-3.5" style={{ color: formData.service === s.name ? "#22C55E" : "#9CA3AF" }} />
-                                  <span className="text-xs font-bold uppercase" style={{ color: formData.service === s.name ? "#22C55E" : "#ccc" }}>{s.name}</span>
+                                  <s.icon className="w-3.5 h-3.5" style={{ color: formData.service === s.name ? "#FF6B00" : "#555" }} />
+                                  <span className="text-xs font-bold uppercase" style={{ color: formData.service === s.name ? "#FF6B00" : "#CCCCCC" }}>{s.name}</span>
                                 </div>
-                                <span className="text-[10px]" style={{ color: "#6B7280" }}>{s.duration}</span>
+                                <span className="text-[10px]" style={{ color: "#888" }}>{s.duration}</span>
                               </motion.button>
                             ))}
                           </div>
@@ -2746,14 +2684,14 @@ function AppointmentSection() {
                       <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#6B7280" }}>
-                              <Calendar className="w-3 h-3 inline mr-1" style={{ color: "#22C55E" }} /> Tarih
+                            <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                              <Calendar className="w-3 h-3 inline mr-1" style={{ color: "#FF6B00" }} /> Tarih
                             </label>
                             <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className={inputClass} style={inputStyle} />
                           </div>
                           <div>
-                            <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#6B7280" }}>
-                              <Clock className="w-3 h-3 inline mr-1" style={{ color: "#22C55E" }} /> Saat
+                            <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                              <Clock className="w-3 h-3 inline mr-1" style={{ color: "#FF6B00" }} /> Saat
                             </label>
                             <select value={formData.time} onChange={(e) => setFormData({ ...formData, time: e.target.value })} className={`${inputClass} appearance-none`} style={inputStyle}>
                               <option value="">Saat seçin...</option>
@@ -2764,28 +2702,28 @@ function AppointmentSection() {
                           </div>
                         </div>
 
-                        <div className="p-4 border space-y-3" style={{ borderColor: "rgba(34,197,94,0.15)", backgroundColor: "rgba(34,197,94,0.03)" }}>
-                          <span className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: "#22C55E" }}>Randevu Özeti</span>
+                        <div className="p-4 border space-y-3" style={{ borderColor: "rgba(255,107,0,0.15)", backgroundColor: "rgba(255,107,0,0.03)" }}>
+                          <span className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: "#FF6B00" }}>Randevu Özeti</span>
                           <div className="grid grid-cols-2 gap-2 text-xs">
-                            <div><span style={{ color: "#6B7280" }}>Ad:</span> <span className="text-[#111827] ml-1">{formData.name || "-"}</span></div>
-                            <div><span style={{ color: "#6B7280" }}>Tel:</span> <span className="text-[#111827] ml-1">{formData.phone || "-"}</span></div>
-                            <div><span style={{ color: "#6B7280" }}>Hizmet:</span> <span className="ml-1" style={{ color: "#22C55E" }}>{formData.service || "-"}</span></div>
-                            <div><span style={{ color: "#6B7280" }}>Tarih:</span> <span className="text-[#111827] ml-1">{formData.date || "-"} {formData.time}</span></div>
+                            <div><span style={{ color: "#888" }}>Ad:</span> <span className="text-white ml-1">{formData.name || "-"}</span></div>
+                            <div><span style={{ color: "#888" }}>Tel:</span> <span className="text-white ml-1">{formData.phone || "-"}</span></div>
+                            <div><span style={{ color: "#888" }}>Hizmet:</span> <span className="ml-1" style={{ color: "#FF6B00" }}>{formData.service || "-"}</span></div>
+                            <div><span style={{ color: "#888" }}>Tarih:</span> <span className="text-white ml-1">{formData.date || "-"} {formData.time}</span></div>
                           </div>
                         </div>
 
                         <AnimatePresence>
                           {submitted && (
-                            <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.95 }} className="p-4 text-center" style={{ backgroundColor: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)" }}>
-                              <Sparkles className="w-6 h-6 mx-auto mb-2" style={{ color: "#22c55e" }} />
-                              <p className="text-sm font-bold" style={{ color: "#22c55e" }}>Randevu talebiniz alındı!</p>
-                              <p className="text-xs mt-1" style={{ color: "#6B7280" }}>En kısa sürede size ulaşacağız.</p>
+                            <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.95 }} className="p-4 text-center" style={{ backgroundColor: "rgba(223,255,0,0.1)", border: "1px solid rgba(223,255,0,0.2)" }}>
+                              <Sparkles className="w-6 h-6 mx-auto mb-2" style={{ color: "#DFFF00" }} />
+                              <p className="text-sm font-bold" style={{ color: "#DFFF00" }}>Randevu talebiniz alındı!</p>
+                              <p className="text-xs mt-1" style={{ color: "#888" }}>En kısa sürede size ulaşacağız.</p>
                             </motion.div>
                           )}
                         </AnimatePresence>
 
                         <motion.a
-                          href={`https://wa.me/905551234567?text=${whatsappMessage}`}
+                          href={`https://wa.me/905533261747?text=${whatsappMessage}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.02 }}
@@ -2797,7 +2735,7 @@ function AppointmentSection() {
                           WhatsApp ile Onayla
                         </motion.a>
 
-                        <Button type="submit" className="w-full text-white font-bold uppercase tracking-wider py-4 text-sm" style={{ backgroundColor: "#22C55E" }}>
+                        <Button type="submit" className="w-full font-bold uppercase tracking-wider py-4 text-sm text-black" style={{ backgroundColor: "#DFFF00" }}>
                           <Send className="w-4 h-4 mr-2" /> Randevuyu Tamamla
                         </Button>
                       </form>
@@ -2813,8 +2751,8 @@ function AppointmentSection() {
                       whileTap={{ scale: 0.97 }}
                       onClick={() => canGoNext() && setStep(step + 1)}
                       disabled={!canGoNext()}
-                      className="flex items-center gap-2 px-8 py-3 text-sm font-bold uppercase tracking-wider text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                      style={{ backgroundColor: canGoNext() ? "#22C55E" : "rgba(0,0,0,0.05)", color: canGoNext() ? "#ffffff" : "#9CA3AF" }}
+                      className="flex items-center gap-2 px-8 py-3 text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                      style={{ backgroundColor: canGoNext() ? "#DFFF00" : "rgba(255,255,255,0.05)", color: canGoNext() ? "#000" : "#555" }}
                     >
                       Devam <ChevronRight className="w-4 h-4" />
                     </motion.button>
@@ -2823,7 +2761,7 @@ function AppointmentSection() {
 
                 {step > 1 && step < 4 && (
                   <div className="mt-4">
-                    <button type="button" onClick={() => setStep(step - 1)} className="text-xs uppercase tracking-wider flex items-center gap-1 transition-colors" style={{ color: "#6B7280" }}>
+                    <button type="button" onClick={() => setStep(step - 1)} className="text-xs uppercase tracking-wider flex items-center gap-1 transition-colors" style={{ color: "#888" }}>
                       <ChevronRight className="w-3 h-3 rotate-180" /> Geri Dön
                     </button>
                   </div>
@@ -2832,57 +2770,58 @@ function AppointmentSection() {
             </motion.div>
           </RevealText>
 
+          {/* Sidebar */}
           <RevealText delay={0.4}>
             <div className="space-y-3">
-              <div className="p-5 border" style={{ borderColor: "rgba(34,197,94,0.1)", backgroundColor: "rgba(255,255,255,0.8)", backdropFilter: "blur(10px)" }}>
+              <div className="p-5 border" style={{ borderColor: "rgba(255,107,0,0.1)", backgroundColor: "rgba(17,17,17,0.8)", backdropFilter: "blur(10px)" }}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #22C55E, #16A34A)" }}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #FF6B00, #E55E00)" }}>
                     <Clock className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <span className="text-sm font-bold text-[#111827] block">Çalışma Saatleri</span>
-                    <span className="text-[10px]" style={{ color: "#6B7280" }}>Haftaiçi & Cumartesi</span>
+                    <span className="text-sm font-bold text-white block">Çalışma Saatleri</span>
+                    <span className="text-[10px]" style={{ color: "#888" }}>Haftaiçi & Cumartesi</span>
                   </div>
                 </div>
                 <div className="space-y-2">
                   {["Pzt - Cmt", "Pazar"].map((day, idx) => (
-                    <div key={day} className="flex justify-between items-center py-1.5 border-b last:border-b-0" style={{ borderColor: "rgba(0,0,0,0.04)" }}>
-                      <span className="text-xs" style={{ color: "#4B5563" }}>{day}</span>
-                      <span className={`text-xs font-bold ${idx === 1 ? "text-red-400" : "text-[#111827]"}`}>{idx === 1 ? "Kapalı" : "09:00 - 20:00"}</span>
+                    <div key={day} className="flex justify-between items-center py-1.5 border-b last:border-b-0" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+                      <span className="text-xs" style={{ color: "#BBBBBB" }}>{day}</span>
+                      <span className={`text-xs font-bold ${idx === 1 ? "text-red-400" : "text-white"}`}>{idx === 1 ? "Kapalı" : "09:00 - 21:00"}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <a href={`mailto:slickstyle@gmail.com?subject=${gmailSubject}&body=${gmailBody}`} target="_blank" rel="noopener noreferrer">
-                <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className="p-4 border flex items-center gap-3 cursor-pointer transition-all" style={{ borderColor: "rgba(0,0,0,0.06)", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(34,197,94,0.1)" }}>
-                    <Mail className="w-4 h-4" style={{ color: "#22C55E" }} />
+              <a href={`mailto:info@canbaykuaför.com?subject=${gmailSubject}&body=${gmailBody}`} target="_blank" rel="noopener noreferrer">
+                <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className="p-4 border flex items-center gap-3 cursor-pointer transition-all" style={{ borderColor: "rgba(255,255,255,0.06)", backgroundColor: "rgba(17,17,17,0.6)" }}>
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(255,107,0,0.1)" }}>
+                    <Mail className="w-4 h-4" style={{ color: "#FF6B00" }} />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#111827] block">E-Posta ile İletişim</span>
-                    <span className="text-[10px]" style={{ color: "#6B7280" }}>slickstyle@gmail.com</span>
+                    <span className="text-xs font-bold text-white block">E-Posta ile İletişim</span>
+                    <span className="text-[10px]" style={{ color: "#888" }}>info@canbaykuaför.com</span>
                   </div>
                 </motion.div>
               </a>
 
-              <a href="tel:+905551234567">
-                <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className="p-4 border flex items-center gap-3 cursor-pointer transition-all" style={{ borderColor: "rgba(0,0,0,0.06)", backgroundColor: "rgba(255,255,255,0.6)" }}>
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(34,197,94,0.1)" }}>
-                    <Phone className="w-4 h-4" style={{ color: "#22C55E" }} />
+              <a href="tel:+905533261747">
+                <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className="p-4 border flex items-center gap-3 cursor-pointer transition-all" style={{ borderColor: "rgba(255,255,255,0.06)", backgroundColor: "rgba(17,17,17,0.6)" }}>
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(255,107,0,0.1)" }}>
+                    <Phone className="w-4 h-4" style={{ color: "#FF6B00" }} />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#111827] block">Bizi Arayın</span>
-                    <span className="text-[10px]" style={{ color: "#6B7280" }}>0555 123 45 67</span>
+                    <span className="text-xs font-bold text-white block">Bizi Arayın</span>
+                    <span className="text-[10px]" style={{ color: "#888" }}>0553 326 17 47</span>
                   </div>
                 </motion.div>
               </a>
 
-              <div className="p-5 text-center" style={{ background: "linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02))", border: "1px solid rgba(34,197,94,0.15)" }}>
-                <Scissors className="w-6 h-6 mx-auto mb-2" style={{ color: "#22C55E" }} />
-                <p className="text-xs font-bold text-[#111827] mb-1">İlk Ziyaretinize Özel</p>
-                <p className="text-2xl font-bold text-gradient-gold">%50 İndirim</p>
-                <p className="text-[10px] mt-1" style={{ color: "#6B7280" }}>Tüm hizmetlerde geçerli</p>
+              <div className="p-5 text-center" style={{ background: "linear-gradient(135deg, rgba(223,255,0,0.08), rgba(223,255,0,0.02))", border: "1px solid rgba(223,255,0,0.15)" }}>
+                <Scissors className="w-6 h-6 mx-auto mb-2" style={{ color: "#DFFF00" }} />
+                <p className="text-xs font-bold text-white mb-1">İlk Ziyaretinize Özel</p>
+                <p className="text-2xl font-bold text-gradient-neon">%50 İndirim</p>
+                <p className="text-[10px] mt-1" style={{ color: "#888" }}>Tüm hizmetlerde geçerli</p>
               </div>
             </div>
           </RevealText>
@@ -2902,14 +2841,14 @@ function ContactSection() {
     {
       icon: Phone,
       title: "Telefon",
-      lines: ["+90 555 123 45 67", "+90 216 345 67 89"],
-      accent: "#FF6B35",
+      lines: ["0553 326 17 47"],
+      accent: "#DFFF00",
       pulse: true,
     },
     {
       icon: Phone,
       title: "WhatsApp",
-      lines: ["+90 555 123 45 67", "Anında yanıt alın"],
+      lines: ["0553 326 17 47", "Anında yanıt alın"],
       accent: "#25D366",
       badge: true,
     },
@@ -2917,10 +2856,9 @@ function ContactSection() {
       icon: Mail,
       title: "E-Posta",
       lines: [
-        "slickstyle@gmail.com",
-        "info@slickstyle.com",
+        "info@canbaykuaför.com",
       ],
-      accent: "#FF6B35",
+      accent: "#FF6B00",
     },
   ];
 
@@ -2928,7 +2866,7 @@ function ContactSection() {
     <section
       id="iletisim"
       className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ backgroundColor: "#f9fafb" }}
+      style={{ backgroundColor: "#0a0a0a" }}
     >
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -2937,19 +2875,19 @@ function ContactSection() {
         <RevealText className="text-center mb-16">
           <span
             className="uppercase tracking-[0.3em] text-sm font-medium"
-            style={{ color: "#FF6B35" }}
+            style={{ color: "#DFFF00" }}
           >
             İletişim
           </span>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-            style={{ color: "#111827" }}
+            style={{ color: "#FFFFFF" }}
           >
-            Bize <span className="text-gradient-gold">Ulaşın</span>
+            Bize <span className="text-gradient-neon">Ulaşın</span>
           </h2>
           <div
             className="w-20 h-1 mx-auto"
-            style={{ backgroundColor: "#FF6B35" }}
+            style={{ backgroundColor: "#DFFF00" }}
           />
         </RevealText>
 
@@ -2969,22 +2907,22 @@ function ContactSection() {
                   whileHover={{ y: -4 }}
                   className="relative p-6 border overflow-hidden cursor-pointer group"
                   style={{
-                    backgroundColor: "#f3f4f6",
+                    backgroundColor: "#111111",
                     borderColor:
-                      "rgba(0,0,0,0.06)",
+                      "rgba(255,255,255,0.06)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = `${card.accent}40`;
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor =
-                      "rgba(0,0,0,0.06)";
+                      "rgba(255,255,255,0.06)";
                   }}
                 >
                   <div
                     className="absolute top-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
                     style={{
-                      background: `linear-gradient(to right, ${card.accent}, #FF8C5A)`,
+                      background: `linear-gradient(to right, ${card.accent}, #FF8C3A)`,
                     }}
                   />
                   <div className="flex items-center gap-4">
@@ -2995,8 +2933,8 @@ function ContactSection() {
                           card.pulse
                             ? {
                                 boxShadow: [
-                                  "0 0 0 0 rgba(255,107,53,0.4)",
-                                  "0 0 0 12px rgba(255,107,53,0)",
+                                  "0 0 0 0 rgba(223,255,0,0.4)",
+                                  "0 0 0 12px rgba(223,255,0,0)",
                                 ],
                               }
                             : {}
@@ -3033,7 +2971,7 @@ function ContactSection() {
                     <div className="flex-1">
                       <h3
                         className="text-lg font-bold uppercase mb-1"
-                        style={{ color: "#111827" }}
+                        style={{ color: "#FFFFFF" }}
                       >
                         {card.title}
                       </h3>
@@ -3041,7 +2979,7 @@ function ContactSection() {
                         <p
                           key={i}
                           className="text-sm"
-                          style={{ color: "#4B5563" }}
+                          style={{ color: "#BBBBBB" }}
                         >
                           {line}
                         </p>
@@ -3065,29 +3003,29 @@ function ContactSection() {
                 animate={isInView ? "visible" : "hidden"}
                 className="p-6 border"
                 style={{
-                  backgroundColor: "#ffffff",
-                  borderColor: "rgba(0,0,0,0.06)",
+                  backgroundColor: "#111111",
+                  borderColor: "rgba(255,255,255,0.06)",
                 }}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <MapPin
                     className="w-5 h-5"
-                    style={{ color: "#FF6B35" }}
+                    style={{ color: "#DFFF00" }}
                   />
                   <h3
                     className="text-lg font-bold uppercase"
-                    style={{ color: "#111827" }}
+                    style={{ color: "#FFFFFF" }}
                   >
                     Adres
                   </h3>
                 </div>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#4B5563" }}
+                  style={{ color: "#BBBBBB" }}
                 >
-                  Atatürk Cad. No: 42
+                  Merkez, İstiklal Cd. No:12/A
                   <br />
-                  Kadıköy, İstanbul
+                  06145 Pursaklar/Ankara
                 </p>
               </motion.div>
             </div>
@@ -3099,24 +3037,24 @@ function ContactSection() {
                 className="absolute -inset-1 rounded-xl"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(255,107,53,0.3), rgba(255,107,53,0.05), rgba(255,107,53,0.3))",
+                    "linear-gradient(135deg, rgba(223,255,0,0.3), rgba(223,255,0,0.05), rgba(223,255,0,0.3))",
                 }}
               />
               <div
                 className="relative rounded-xl overflow-hidden"
                 style={{
                   border:
-                    "1px solid rgba(255,107,53,0.2)",
+                    "1px solid rgba(223,255,0,0.2)",
                 }}
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.5!2d28.98!3d41.03!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAyJzEwLjgiTiAyOMKwNTknMjQuMCJF!5e0!3m2!1str!2str!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.5!2d32.87!3d39.97!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDU4JzEyLjAiTiAzMsKwNTInMTIuMCJF!5e0!3m2!1str!2str!4v1234567890"
                   width="100%"
                   height="500"
                   style={{
                     border: 0,
                     filter:
-                      "brightness(1) contrast(1) saturate(0)",
+                      "brightness(0.7) contrast(1.1) saturate(0)",
                   }}
                   allowFullScreen
                   loading="lazy"
@@ -3130,10 +3068,10 @@ function ContactSection() {
                     rel="noopener noreferrer"
                     className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110"
                     style={{
-                      backgroundColor: "#FF6B35",
+                      backgroundColor: "#DFFF00",
                     }}
                   >
-                    <MapPin className="w-5 h-5 text-white" />
+                    <MapPin className="w-5 h-5 text-black" />
                   </a>
                 </div>
               </div>
@@ -3150,7 +3088,7 @@ function ContactSection() {
 function Footer() {
   return (
     <footer
-      style={{ backgroundColor: "#111827" }}
+      style={{ backgroundColor: "#000000" }}
       className="border-t"
     >
       <div
@@ -3162,41 +3100,34 @@ function Footer() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(to bottom right, #FF6B35, #E55A2B)",
-                  }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
                 >
-                  <Scissors
-                    className="w-4 h-4 text-white"
-                    strokeWidth={2.5}
-                  />
+                  <Image src="/canbay-icon.png" alt="Canbay" width={40} height={40} className="object-cover" />
                 </div>
                 <div>
                   <span className="text-lg font-extrabold uppercase tracking-[0.15em] text-white">
-                    Slick
+                    Canbay
                   </span>
                   <span
                     className="text-[10px] uppercase tracking-[0.35em] font-medium ml-1"
-                    style={{ color: "#FF6B35" }}
+                    style={{ color: "#DFFF00" }}
                   >
-                    Style
+                    Kuaför
                   </span>
                 </div>
               </div>
               <p
                 className="text-sm leading-relaxed mb-4"
-                style={{ color: "#777" }}
+                style={{ color: "#888" }}
               >
-                Erkekler için premium berber hizmeti. Modern
+                Profesyonel berber hizmeti. Modern
                 teknikler ve geleneksel ustalığın mükemmel
-                birleşimi.
+                birleşimi. 2016&apos;dan beri Pursaklar&apos;da.
               </p>
               <div className="flex gap-3">
                 <a
                   href="#"
-                  className="w-9 h-9 rounded-full border flex items-center justify-center hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/10 transition-all duration-300"
+                  className="w-9 h-9 rounded-full border flex items-center justify-center hover:border-[#DFFF00]/50 hover:bg-[#DFFF00]/10 transition-all duration-300"
                   style={{
                     borderColor:
                       "rgba(255,255,255,0.08)",
@@ -3204,12 +3135,12 @@ function Footer() {
                 >
                   <Instagram
                     className="w-4 h-4"
-                    style={{ color: "#777" }}
+                    style={{ color: "#888" }}
                   />
                 </a>
                 <a
                   href="#"
-                  className="w-9 h-9 rounded-full border flex items-center justify-center hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/10 transition-all duration-300"
+                  className="w-9 h-9 rounded-full border flex items-center justify-center hover:border-[#DFFF00]/50 hover:bg-[#DFFF00]/10 transition-all duration-300"
                   style={{
                     borderColor:
                       "rgba(255,255,255,0.08)",
@@ -3217,7 +3148,7 @@ function Footer() {
                 >
                   <Facebook
                     className="w-4 h-4"
-                    style={{ color: "#777" }}
+                    style={{ color: "#888" }}
                   />
                 </a>
               </div>
@@ -3226,7 +3157,7 @@ function Footer() {
             <div>
               <h4
                 className="font-bold uppercase tracking-wider text-sm mb-4"
-                style={{ color: "#ffffff" }}
+                style={{ color: "#FFFFFF" }}
               >
                 Hızlı Erişim
               </h4>
@@ -3235,8 +3166,8 @@ function Footer() {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm transition-colors hover:text-[#FF6B35]"
-                      style={{ color: "#777" }}
+                      className="text-sm transition-colors hover:text-[#DFFF00]"
+                      style={{ color: "#888" }}
                     >
                       {link.label}
                     </a>
@@ -3248,7 +3179,7 @@ function Footer() {
             <div>
               <h4
                 className="font-bold uppercase tracking-wider text-sm mb-4"
-                style={{ color: "#ffffff" }}
+                style={{ color: "#FFFFFF" }}
               >
                 Hizmetler
               </h4>
@@ -3257,8 +3188,8 @@ function Footer() {
                   <li key={s.name}>
                     <a
                       href="#hizmetler"
-                      className="text-sm transition-colors hover:text-[#FF6B35]"
-                      style={{ color: "#777" }}
+                      className="text-sm transition-colors hover:text-[#DFFF00]"
+                      style={{ color: "#888" }}
                     >
                       {s.name} - {s.duration}
                     </a>
@@ -3270,48 +3201,48 @@ function Footer() {
             <div>
               <h4
                 className="font-bold uppercase tracking-wider text-sm mb-4"
-                style={{ color: "#ffffff" }}
+                style={{ color: "#FFFFFF" }}
               >
                 İletişim
               </h4>
               <div className="space-y-3">
                 <div
                   className="flex items-center gap-2 text-sm"
-                  style={{ color: "#777" }}
+                  style={{ color: "#888" }}
                 >
                   <MapPin
                     className="w-4 h-4 flex-shrink-0"
-                    style={{ color: "#FF6B35" }}
+                    style={{ color: "#DFFF00" }}
                   />
-                  <span>Kadıköy, İstanbul</span>
+                  <span>Pursaklar, Ankara</span>
                 </div>
                 <div
                   className="flex items-center gap-2 text-sm"
-                  style={{ color: "#777" }}
+                  style={{ color: "#888" }}
                 >
                   <Phone
                     className="w-4 h-4 flex-shrink-0"
-                    style={{ color: "#FF6B35" }}
+                    style={{ color: "#DFFF00" }}
                   />
-                  <span>+90 555 123 45 67</span>
+                  <span>0553 326 17 47</span>
                 </div>
                 <div
                   className="flex items-center gap-2 text-sm"
-                  style={{ color: "#4B5563" }}
+                  style={{ color: "#BBBBBB" }}
                 >
                   <Mail
                     className="w-4 h-4 flex-shrink-0"
-                    style={{ color: "#FF6B35" }}
+                    style={{ color: "#DFFF00" }}
                   />
-                  <span>info@slickstyle.com</span>
+                  <span>info@canbaykuaför.com</span>
                 </div>
                 <div
                   className="flex items-center gap-2 text-sm"
-                  style={{ color: "#4B5563" }}
+                  style={{ color: "#BBBBBB" }}
                 >
                   <Clock
                     className="w-4 h-4 flex-shrink-0"
-                    style={{ color: "#FF6B35" }}
+                    style={{ color: "#DFFF00" }}
                   />
                   <span>Pzt - Cmt: 09:00 - 21:00</span>
                 </div>
@@ -3323,11 +3254,11 @@ function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs" style={{ color: "#777" }}>
-            © 2024 Slick Style. Tüm hakları saklıdır.
+          <p className="text-xs" style={{ color: "#888" }}>
+            © 2024 Canbay Kuaför. Tüm hakları saklıdır.
           </p>
           <p className="text-xs" style={{ color: "#555" }}>
-            Premium Berber Deneyimi
+            Profesyonel Berber Deneyimi
           </p>
         </div>
       </div>
@@ -3363,13 +3294,13 @@ function ScrollToTop() {
           }
           className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300"
           style={{
-            backgroundColor: "#FF6B35",
+            backgroundColor: "#DFFF00",
             boxShadow:
-              "0 0 20px rgba(255,107,53,0.3)",
+              "0 0 20px rgba(223,255,0,0.3)",
           }}
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-5 h-5 text-white" />
+          <ArrowUp className="w-5 h-5 text-black" />
         </motion.button>
       )}
     </AnimatePresence>
@@ -3381,7 +3312,7 @@ function ScrollToTop() {
 export default function Home() {
   return (
     <main
-      style={{ backgroundColor: "#ffffff" }}
+      style={{ backgroundColor: "#000000" }}
       className="min-h-screen"
     >
       <Navbar />
