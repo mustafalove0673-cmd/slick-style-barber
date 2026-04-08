@@ -627,6 +627,7 @@ const services = [
     price: "$30",
     duration: "45 dk",
     tag: "En Popüler",
+    image: "/gallery-1.png",
   },
   {
     icon: Crown,
@@ -635,6 +636,7 @@ const services = [
     price: "$15",
     duration: "30 dk",
     tag: "",
+    image: "/gallery-2.png",
   },
   {
     icon: Sparkles,
@@ -643,6 +645,7 @@ const services = [
     price: "$40",
     duration: "60 dk",
     tag: "Premium",
+    image: "/gallery-3.png",
   },
   {
     icon: Flame,
@@ -651,6 +654,7 @@ const services = [
     price: "$25",
     duration: "30 dk",
     tag: "",
+    image: "/gallery-4.png",
   },
   {
     icon: Droplets,
@@ -659,6 +663,7 @@ const services = [
     price: "$35",
     duration: "50 dk",
     tag: "Yeni",
+    image: "/gallery-5.png",
   },
   {
     icon: Gem,
@@ -667,12 +672,60 @@ const services = [
     price: "$20",
     duration: "40 dk",
     tag: "",
+    image: "/products.png",
+  },
+  {
+    icon: Brush,
+    name: "Ağda Bakımı",
+    desc: "Profesyonel ağda uygulaması ile pürüzsüz ve temiz bir cilt elde edin. Yüz ve boyun bölgesi dahil.",
+    price: "$25",
+    duration: "30 dk",
+    tag: "",
+    image: "/about.png",
+  },
+  {
+    icon: Zap,
+    name: "Modern Fade",
+    desc: "Skin fade, taper fade ve drop fade gibi modern kesim teknikleri ile trend bir görünüm.",
+    price: "$35",
+    duration: "50 dk",
+    tag: "Trend",
+    image: "/barber-hero.png",
+  },
+];
+
+const experienceCards = [
+  {
+    icon: <Crown className="w-8 h-8" style={{ color: "#c9a96e" }} />,
+    title: "VIP Bakım",
+    desc: "Kraliyet tadında premium bakım deneyimi. Özel aromaterapi ve masaj dahil.",
+    image: "/gallery-1.png",
+  },
+  {
+    icon: <Sparkles className="w-8 h-8" style={{ color: "#c9a96e" }} />,
+    title: "Ayrıcalıklı Hizmet",
+    desc: "Özel tasarım hizmetlerimiz. Kişiye özel saç ve sakal planlaması.",
+    image: "/gallery-2.png",
+  },
+  {
+    icon: <Gem className="w-8 h-8" style={{ color: "#c9a96e" }} />,
+    title: "Premium Paket",
+    desc: "En kaliteli ürünlerle kapsamlı bakım. Saç + Sakal + Cilt bakımı bir arada.",
+    image: "/gallery-3.png",
+  },
+  {
+    icon: <Flame className="w-8 h-8" style={{ color: "#c9a96e" }} />,
+    title: "Grooming Set",
+    desc: "Profesyonel erkek bakım seti. Tam korunma ve bakım deneyimi.",
+    image: "/gallery-4.png",
   },
 ];
 
 function ServicesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const expRef = useRef(null);
+  const isExpInView = useInView(expRef, { once: true, margin: "-100px" });
 
   return (
     <section id="hizmetler" className="relative py-24 lg:py-32" style={{ backgroundColor: "#090909" }}>
@@ -700,53 +753,154 @@ function ServicesSection() {
           </div>
         </RevealText>
 
-        <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
-          {services.map((s, idx) => (
+        <div className="grid grid-cols-2 gap-4 lg:gap-6">
+          {services.map((s, idx) => {
+            const anims = [
+              { initial: { opacity: 0, x: -40 }, animate: { opacity: 1, x: 0 } },
+              { initial: { opacity: 0, x: 40 }, animate: { opacity: 1, x: 0 } },
+              { initial: { opacity: 0, scale: 0.9 }, animate: { opacity: 1, scale: 1 } },
+              { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 } },
+            ];
+            const anim = anims[idx % anims.length];
+            return (
+              <motion.div
+                key={s.name}
+                initial={anim.initial}
+                animate={isInView ? anim.animate : anim.initial}
+                transition={{ duration: 0.5, delay: 0.05 + idx * 0.08 }}
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="group relative border overflow-hidden transition-all duration-500 cursor-pointer"
+                style={{
+                  backgroundColor: "#121212",
+                  borderColor: "rgba(255,255,255,0.06)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
+                  e.currentTarget.style.boxShadow = "0 0 25px rgba(201,169,110,0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <div className="absolute top-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ background: "linear-gradient(to right, #c9a96e, #e0c68b)" }} />
+
+                <div className="relative h-28 sm:h-36 overflow-hidden">
+                  <Image
+                    src={s.image}
+                    alt={s.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #121212, transparent 60%)" }} />
+                  <div className="absolute top-2 right-2">
+                    {s.tag && (
+                      <span className="text-[9px] uppercase tracking-widest px-2 py-0.5 font-bold" style={{ color: "#090909", backgroundColor: "#c9a96e" }}>
+                        {s.tag}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-3 sm:p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(201,169,110,0.1)" }}>
+                        <s.icon className="w-4 h-4" style={{ color: "#c9a96e" }} />
+                      </div>
+                      <h3 className="text-sm sm:text-base font-bold uppercase group-hover:text-[#c9a96e] transition-colors duration-300 leading-tight" style={{ color: "#f0f0f0" }}>
+                        {s.name}
+                      </h3>
+                    </div>
+                    <span className="text-base sm:text-lg font-bold" style={{ color: "#c9a96e" }}>{s.price}</span>
+                  </div>
+                  <p className="text-xs leading-relaxed mb-3 line-clamp-2" style={{ color: "#777" }}>
+                    {s.desc}
+                  </p>
+                  <div className="flex items-center gap-2 text-[10px] sm:text-xs" style={{ color: "#777" }}>
+                    <Clock className="w-3 h-3" style={{ color: "#c9a96e" }} />
+                    <span>{s.duration}</span>
+                    <Star className="w-3 h-3 ml-1" style={{ color: "#c9a96e" }} />
+                    <span>4.9</span>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        <RevealText className="mt-20" delay={0.3}>
+          <div className="flex items-center justify-center gap-4 mb-10">
+            <div className="h-[1px] w-12" style={{ backgroundColor: "rgba(201,169,110,0.3)" }} />
+            <span className="uppercase tracking-[0.3em] text-sm font-medium" style={{ color: "#c9a96e" }}>
+              Özel Deneyimler
+            </span>
+            <div className="h-[1px] w-12" style={{ backgroundColor: "rgba(201,169,110,0.3)" }} />
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold uppercase text-center mb-2" style={{ color: "#f0f0f0" }}>
+            Premium <span className="text-gradient-gold">Paketler</span>
+          </h3>
+          <p className="text-sm text-center mb-10" style={{ color: "#777" }}>Size özel ayrıcalıklı deneyimler</p>
+        </RevealText>
+
+        <div className="grid grid-cols-2 gap-4 lg:gap-6" ref={expRef}>
+          {experienceCards.map((card, idx) => (
             <motion.div
-              key={s.name}
+              key={card.title}
               initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + idx * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative p-6 lg:p-8 border overflow-hidden transition-all duration-500 cursor-pointer"
+              animate={isExpInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + idx * 0.15 }}
+              whileHover={{ scale: 1.03, y: -4 }}
+              className="group relative border overflow-hidden transition-all duration-500 cursor-pointer"
               style={{
                 backgroundColor: "#121212",
-                borderColor: "rgba(255,255,255,0.06)",
+                borderColor: "rgba(201,169,110,0.15)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)";
-                e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.1)";
+                e.currentTarget.style.borderColor = "rgba(201,169,110,0.4)";
+                e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.15)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                e.currentTarget.style.borderColor = "rgba(201,169,110,0.15)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              <div className="absolute top-0 left-0 w-full h-[2px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ background: "linear-gradient(to right, #c9a96e, #e0c68b)" }} />
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center border" style={{ borderColor: "rgba(201,169,110,0.2)", backgroundColor: "rgba(201,169,110,0.05)" }}>
-                  <s.icon className="w-6 h-6" style={{ color: "#c9a96e" }} />
-                </div>
-                <div className="flex items-center gap-2">
-                  {s.tag && (
-                    <span className="text-[10px] uppercase tracking-widest px-2 py-1 border" style={{ color: "#c9a96e", borderColor: "rgba(201,169,110,0.3)", backgroundColor: "rgba(201,169,110,0.08)" }}>
-                      {s.tag}
-                    </span>
-                  )}
-                  <span className="text-lg font-bold" style={{ color: "#c9a96e" }}>{s.price}</span>
+              <div className="absolute top-0 left-0 w-full h-[2px]" style={{ background: "linear-gradient(to right, #c9a96e, #e0c68b)" }} />
+
+              <div className="relative h-32 sm:h-44 overflow-hidden">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #121212 10%, rgba(18,18,18,0.4) 60%, transparent)" }} />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #c9a96e, #a88942)", boxShadow: "0 0 15px rgba(201,169,110,0.3)" }}>
+                      {card.icon}
+                    </div>
+                    <h4 className="text-sm sm:text-base font-bold uppercase" style={{ color: "#f0f0f0" }}>
+                      {card.title}
+                    </h4>
+                  </div>
                 </div>
               </div>
-              <h3 className="text-lg font-bold uppercase mb-2 group-hover:text-[#c9a96e] transition-colors duration-300" style={{ color: "#f0f0f0" }}>
-                {s.name}
-              </h3>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#777" }}>
-                {s.desc}
-              </p>
-              <div className="flex items-center gap-2 text-xs" style={{ color: "#777" }}>
-                <Clock className="w-3.5 h-3.5" style={{ color: "#c9a96e" }} />
-                <span>{s.duration}</span>
-                <Star className="w-3.5 h-3.5 ml-2" style={{ color: "#c9a96e" }} />
-                <span>4.9</span>
+
+              <div className="p-3 sm:p-4">
+                <p className="text-xs leading-relaxed" style={{ color: "#777" }}>
+                  {card.desc}
+                </p>
+                <div className="mt-3 pt-3 border-t flex items-center justify-between" style={{ borderColor: "rgba(201,169,110,0.1)" }}>
+                  <a href="#randevu" className="text-[10px] sm:text-xs uppercase tracking-wider font-bold flex items-center gap-1" style={{ color: "#c9a96e" }}>
+                    Randevu Al <ChevronRight className="w-3 h-3" />
+                  </a>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3" style={{ fill: "#c9a96e", color: "#c9a96e" }} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -846,205 +1000,7 @@ function AboutSection() {
   );
 }
 
-function UiverseShowcase() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const strokeRef = useRef(null);
-  const isStrokeInView = useInView(strokeRef, { once: false, margin: "-50px" });
 
-  const flipCards = [
-    {
-      icon: <Crown className="w-12 h-12" style={{ color: "#c9a96e" }} />,
-      title: "VIP Bakım",
-      desc: "Kraliyet tadında premium bakım deneyimi.",
-    },
-    {
-      icon: <Sparkles className="w-12 h-12" style={{ color: "#c9a96e" }} />,
-      title: "Ayrıcalıklı",
-      desc: "Özel tasarım hizmetlerimiz.",
-    },
-    {
-      icon: <Gem className="w-12 h-12" style={{ color: "#c9a96e" }} />,
-      title: "Premium",
-      desc: "En kaliteli ürünlerle bakım.",
-    },
-  ];
-
-  const hazardCards = [
-    {
-      month: "Oca",
-      date: "15",
-      title: "Saç Bakımı Trendleri",
-      desc: "2025'in en popüler erkek saç modelleri ve bakım trendleri hakkında bilmeniz gereken her şey.",
-    },
-    {
-      month: "Sub",
-      date: "28",
-      title: "Sakal Bakım Rehberi",
-      desc: "Doğal sakal bakımı için uzman ipuçları ve etkili bakım rutinleri.",
-    },
-  ];
-
-  const carouselImages = [
-    "/gallery-1.png",
-    "/gallery-2.png",
-    "/gallery-3.png",
-    "/gallery-4.png",
-    "/gallery-5.png",
-    "/gallery-1.png",
-  ];
-
-  const carouselTransforms = [
-    "rotateY(0deg) translateZ(120px)",
-    "rotateY(60deg) translateZ(120px)",
-    "rotateY(120deg) translateZ(120px)",
-    "rotateY(180deg) translateZ(120px)",
-    "rotateY(240deg) translateZ(120px)",
-    "rotateY(300deg) translateZ(120px)",
-  ];
-
-  return (
-    <section className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#090909" }}>
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.04) 0%, transparent 60%)" }} />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={sectionRef}>
-        <RevealText className="text-center mb-16">
-          <span className="uppercase tracking-[0.3em] text-sm font-medium" style={{ color: "#c9a96e" }}>
-            Showcase
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4" style={{ color: "#f0f0f0" }}>
-            Ozel <span className="text-gradient-gold">Deneyim</span>
-          </h2>
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="h-[1px] w-12" style={{ backgroundColor: "rgba(201,169,110,0.3)" }} />
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#c9a96e" }} />
-            <div className="h-[1px] w-12" style={{ backgroundColor: "rgba(201,169,110,0.3)" }} />
-          </div>
-          <p className="text-lg max-w-md mx-auto" style={{ color: "#777" }}>Premium Hizmetlerimiz</p>
-        </RevealText>
-
-        <div className="grid sm:grid-cols-3 gap-6 mb-16">
-          {flipCards.map((card, idx) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
-            >
-              <div
-                className={`uv-flip-card ${isInView ? "auto-flip" : ""}`}
-                style={{ animationDelay: `${idx * 1.5}s` }}
-              >
-                {card.icon}
-                <div className="uv-flip-card-content">
-                  <h4>{card.title}</h4>
-                  <p>{card.desc}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-6 mb-16">
-          {hazardCards.map((card, idx) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 + idx * 0.15 }}
-            >
-              <div className="uv-3d-parent">
-                <div className="uv-3d-card">
-                  <div className="uv-3d-date-box">
-                    <span className="uv-3d-month">{card.month}</span>
-                    <span className="uv-3d-date">{card.date}</span>
-                  </div>
-                  <div className="uv-3d-content-box">
-                    <div className="uv-3d-title">{card.title}</div>
-                    <div className="uv-3d-desc">{card.desc}</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center gap-10 mb-16">
-          <motion.div
-            ref={strokeRef}
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <button
-              type="button"
-              className={`uv-stroke-btn ${isStrokeInView ? "auto-trigger" : ""}`}
-              data-text="Hizmetlerimiz"
-            >
-              Hizmetlerimiz
-              <span className="uv-stroke-hover" />
-            </button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <a href="#randevu" className="uv-gradient-btn">
-              <span className="uv-gradient-container">
-                <span className="uv-gradient-inner" />
-              </span>
-              <Calendar className="w-5 h-5 mr-2" />
-              Randevu Al
-            </a>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="relative mb-16"
-          style={{ height: 240 }}
-        >
-          <div className="uv-3d-carousel">
-            {carouselImages.map((src, idx) => (
-              <div
-                key={`${src}-${idx}`}
-                className="uv-3d-carousel-item"
-                style={{
-                  transform: `translate(-50%, -50%) ${carouselTransforms[idx]}`,
-                }}
-              >
-                <Image src={src} alt={`Gallery ${idx + 1}`} width={80} height={112} />
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="flex justify-center"
-        >
-          <div className="uv-flower-loader" aria-hidden="true">
-            <svg className="petal-1" width="60" height="60" viewBox="0 0 60 60">
-              <path d="M30 0L40 20L60 30L40 40L30 60L20 40L0 30L20 20Z" fill="#c9a96e" />
-            </svg>
-            <svg className="petal-2" width="60" height="60" viewBox="0 0 60 60">
-              <path d="M30 0L40 20L60 30L40 40L30 60L20 40L0 30L20 20Z" fill="#c9a96e" />
-            </svg>
-            <svg className="petal-3" width="60" height="60" viewBox="0 0 60 60">
-              <path d="M30 0L40 20L60 30L40 40L30 60L20 40L0 30L20 20Z" fill="#c9a96e" />
-            </svg>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 const products = [
   {
@@ -1965,7 +1921,6 @@ export default function Home() {
       <ServicesSection />
       <MarqueeSection2 />
       <AboutSection />
-      <UiverseShowcase />
       <ProductsSection />
       <MarqueeSection3 />
       <GallerySection />
