@@ -2106,151 +2106,127 @@ function MarqueeSection3() {
 
 // ===== Gallery Section =====
 
-const galleryStyles = ["Kesim", "Sakal", "Styling", "Dönüşüm"];
 const galleryItems = [
-  { src: "/gallery-1.png", alt: "Modern fade kesim", style: "Kesim" },
-  { src: "/gallery-2.png", alt: "Sakal şekillendirme", style: "Sakal" },
-  { src: "/gallery-3.png", alt: "Klasik tıraş", style: "Styling" },
-  { src: "/gallery-4.png", alt: "Dönüşüm öncesi", style: "Dönüşüm" },
-  { src: "/gallery-5.png", alt: "Saç modeli", style: "Kesim" },
-  { src: "/products.png", alt: "Styling çalışması", style: "Styling" },
+  { src: "/gallery-1.png", alt: "Modern fade kesim", title: "Fade Master", category: "Kesim", desc: "Skin fade tekniği ile modern ve keskin görünüm" },
+  { src: "/gallery-2.png", alt: "Sakal şekillendirme", title: "Beard Sculpt", category: "Sakal", desc: "Doğal formunu koruyarak profesyonel sakal tasarımı" },
+  { src: "/gallery-3.png", alt: "Klasik tıraş", title: "Classic Cut", category: "Styling", desc: "Zamansız klasik tarz, modern dokunuşlarla" },
+  { src: "/gallery-4.png", alt: "Dönüşüm öncesi", title: "Transformation", category: "Dönüşüm", desc: "Baştan sona tam stil dönüşümü" },
+  { src: "/gallery-5.png", alt: "Saç modeli", title: "Texture Crop", category: "Kesim", desc: "Dokulu ve hacimli modern saç modeli" },
+  { src: "/products.png", alt: "Styling çalışması", title: "Style Edit", category: "Styling", desc: "Profesyonel şekillendirme ve styling" },
 ];
 
 function GallerySection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeStyle, setActiveStyle] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
 
   useEffect(() => {
     if (!isAutoPlay) return;
     const interval = setInterval(() => {
-      setActiveStyle((prev) => (prev + 1) % galleryStyles.length);
-    }, 4000);
+      setActiveIdx((prev) => (prev + 1) % galleryItems.length);
+    }, 3500);
     return () => clearInterval(interval);
   }, [isAutoPlay]);
 
-  const filtered = galleryItems.filter(
-    (item) => item.style === galleryStyles[activeStyle]
-  );
+  const goTo = (idx: number) => {
+    setActiveIdx(idx);
+    setIsAutoPlay(false);
+  };
 
   return (
-    <section
-      id="galeri"
-      className="relative py-24 lg:py-32"
-      style={{ backgroundColor: "#0e0e0e" }}
-    >
-      <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        ref={ref}
-      >
+    <section id="galeri" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#0a0a0a" }}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(201,169,110,0.04) 0%, transparent 60%)" }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <RevealText className="text-center mb-12">
-          <span
-            className="uppercase tracking-[0.3em] text-sm font-medium"
-            style={{ color: "#c9a96e" }}
-          >
-            Çalışmalarımız
-          </span>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-            style={{ color: "#f0f0f0" }}
-          >
-            Dönüşüm Galerisi
+          <span className="uppercase tracking-[0.3em] text-sm font-medium" style={{ color: "#c9a96e" }}>Portfolyo</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4" style={{ color: "#f0f0f0" }}>
+            Dönüşüm <span className="text-gradient-gold">Galerisi</span>
           </h2>
-          <div
-            className="w-20 h-1 mx-auto"
-            style={{ backgroundColor: "#c9a96e" }}
-          />
+          <p className="text-sm max-w-md mx-auto" style={{ color: "#555" }}>Her kesim bir sanat eseridir</p>
         </RevealText>
 
         <RevealText delay={0.2}>
-          <div className="flex flex-col sm:flex-row gap-8">
-            <div className="flex sm:flex-col gap-2 justify-center sm:justify-start flex-shrink-0">
-              {galleryStyles.map((style, idx) => (
-                <button
-                  key={style}
-                  onClick={() => {
-                    setActiveStyle(idx);
-                    setIsAutoPlay(false);
-                  }}
-                  className={`relative px-5 py-2.5 text-sm uppercase tracking-wider transition-all duration-300 rounded-sm whitespace-nowrap ${
-                    activeStyle === idx
-                      ? "text-white shadow-[0_0_20px_rgba(201,169,110,0.3)]"
-                      : ""
-                  }`}
-                  style={
-                    activeStyle === idx
-                      ? {
-                          backgroundColor: "#c9a96e",
-                          color: "#fff",
-                        }
-                      : { color: "#777" }
-                  }
-                >
-                  {style}
+          <div className="relative">
+            <div className="grid lg:grid-cols-[1fr_340px] gap-6 items-center">
+              <div className="relative aspect-[4/3] lg:aspect-[16/10] overflow-hidden group" style={{ clipPath: "polygon(0 0, 100% 0, 96% 100%, 0% 100%)" }}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIdx}
+                    initial={{ opacity: 0, scale: 1.08, filter: "blur(8px) brightness(0.6)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px) brightness(1)" }}
+                    exit={{ opacity: 0, scale: 0.95, filter: "blur(8px) brightness(0.6)" }}
+                    transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="absolute inset-0"
+                  >
+                    <Image src={galleryItems[activeIdx].src} alt={galleryItems[activeIdx].alt} fill className="object-cover" />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(9,9,9,0.6) 0%, transparent 50%, rgba(9,9,9,0.4) 100%)" }} />
+                  </motion.div>
+                </AnimatePresence>
+                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIdx}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.4, delay: 0.15 }}
+                    >
+                      <span className="inline-block text-[10px] uppercase tracking-[0.2em] px-3 py-1 mb-3 font-bold" style={{ backgroundColor: "rgba(201,169,110,0.2)", color: "#c9a96e", border: "1px solid rgba(201,169,110,0.3)" }}>
+                        {galleryItems[activeIdx].category}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase text-white mb-2">{galleryItems[activeIdx].title}</h3>
+                      <p className="text-sm max-w-md" style={{ color: "rgba(255,255,255,0.7)" }}>{galleryItems[activeIdx].desc}</p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: isAutoPlay ? "#c9a96e" : "#555" }} />
+                  <span className="text-[10px] uppercase tracking-wider font-bold" style={{ color: isAutoPlay ? "#c9a96e" : "#555" }}>
+                    {isAutoPlay ? "OTOMATIK" : "MANUEL"}
+                  </span>
+                </div>
+                <button onClick={() => setIsAutoPlay(!isAutoPlay)} className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center border backdrop-blur-md transition-colors" style={{ borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(0,0,0,0.5)" }}>
+                  {isAutoPlay ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white" />}
                 </button>
-              ))}
-              <button
-                onClick={() => setIsAutoPlay(!isAutoPlay)}
-                className="text-xs uppercase tracking-wider mt-1 transition-colors"
-                style={{
-                  color: isAutoPlay ? "#c9a96e" : "#777",
-                }}
-              >
-                {isAutoPlay ? "⏸ Durdur" : "▶ Oynat"}
-              </button>
+              </div>
+
+              <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
+                {galleryItems.map((item, idx) => (
+                  <motion.button
+                    key={item.src}
+                    onClick={() => goTo(idx)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`relative flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 lg:w-full lg:h-20 overflow-hidden transition-all duration-300 border-2 ${
+                      activeIdx === idx ? "border-[#c9a96e] shadow-[0_0_20px_rgba(201,169,110,0.3)]" : "border-transparent opacity-50 hover:opacity-80"
+                    }`}
+                    style={{ clipPath: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+                  >
+                    <Image src={item.src} alt={item.alt} fill className="object-cover" />
+                    <div className="absolute inset-0" style={{ background: activeIdx === idx ? "rgba(201,169,110,0.15)" : "rgba(0,0,0,0.3)" }} />
+                    <div className="absolute bottom-1 left-2 lg:bottom-1.5 lg:left-3">
+                      <span className="text-[9px] lg:text-[10px] uppercase tracking-wider font-bold text-white block leading-tight">{item.title}</span>
+                    </div>
+                    <div className={`absolute top-1 right-1 lg:top-1.5 lg:right-2 w-2 h-2 lg:w-2.5 lg:h-2.5 rounded-full transition-colors ${activeIdx === idx ? "bg-[#c9a96e]" : "bg-white/30"}`} />
+                  </motion.button>
+                ))}
+              </div>
             </div>
 
-            <div className="flex-1">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStyle}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.4 }}
-                  className="grid grid-cols-2 gap-3"
-                >
-                  {filtered.map((img, idx) => (
-                    <motion.div
-                      key={img.src}
-                      custom={idx * 0.1}
-                      variants={clipReveal}
-                      initial="hidden"
-                      animate="visible"
-                      className={`relative overflow-hidden rounded-sm group cursor-pointer ${
-                        idx === 0
-                          ? "row-span-2 aspect-[3/4]"
-                          : "aspect-square"
-                      }`}
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-[#090909]/0 group-hover:bg-[#090909]/50 transition-all duration-300 flex items-center justify-center">
-                        <ZoomIn
-                          className="w-10 h-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{ color: "#c9a96e" }}
-                        />
-                      </div>
-                      <div
-                        className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background:
-                            "linear-gradient(to top, rgba(9,9,9,0.8), transparent)",
-                        }}
-                      >
-                        <p className="text-white text-xs uppercase tracking-wider">
-                          {img.alt}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button onClick={() => goTo((activeIdx - 1 + galleryItems.length) % galleryItems.length)} className="w-12 h-12 border flex items-center justify-center transition-all hover:border-[#c9a96e] hover:bg-[#c9a96e]/10" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+                <ChevronRight className="w-5 h-5 rotate-180" style={{ color: "#c9a96e" }} />
+              </button>
+              <div className="flex gap-2">
+                {galleryItems.map((_, idx) => (
+                  <button key={idx} onClick={() => goTo(idx)} className="h-1 rounded-full transition-all duration-300" style={{ width: activeIdx === idx ? "32px" : "8px", backgroundColor: activeIdx === idx ? "#c9a96e" : "rgba(255,255,255,0.15)" }} />
+                ))}
+              </div>
+              <button onClick={() => goTo((activeIdx + 1) % galleryItems.length)} className="w-12 h-12 border flex items-center justify-center transition-all hover:border-[#c9a96e] hover:bg-[#c9a96e]/10" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+                <ChevronRight className="w-5 h-5" style={{ color: "#c9a96e" }} />
+              </button>
             </div>
           </div>
         </RevealText>
@@ -2613,6 +2589,7 @@ function MarqueeSection4() {
 function AppointmentSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -2626,442 +2603,286 @@ function AppointmentSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setTimeout(() => { setSubmitted(false); setStep(1); setFormData({ name: "", phone: "", service: "", date: "", time: "", note: "" }); }, 4000);
+  };
+
+  const canGoNext = () => {
+    if (step === 1) return formData.name.length > 0 && formData.phone.length > 0;
+    if (step === 2) return formData.service.length > 0;
+    return formData.date.length > 0 && formData.time.length > 0;
   };
 
   const whatsappMessage = encodeURIComponent(
     `Merhaba, randevu almak istiyorum.\nAd: ${formData.name || "..."}\nTelefon: ${formData.phone || "..."}\nHizmet: ${formData.service || "..."}\nTarih: ${formData.date || "..."}\nSaat: ${formData.time || "..."}`
   );
-  const gmailSubject = encodeURIComponent(
-    "Randevu Talebi - Slick Style"
-  );
+  const gmailSubject = encodeURIComponent("Randevu Talebi - Slick Style");
   const gmailBody = encodeURIComponent(
     `Merhaba Slick Style Ekibi,\n\nRandevu almak istiyorum:\n\nAd Soyad: ${formData.name || "..."}\nTelefon: ${formData.phone || "..."}\nHizmet: ${formData.service || "..."}\nTarih: ${formData.date || "..."}\nSaat: ${formData.time || "..."}\nNot: ${formData.note || "..."}\n\nTeşekkürler!`
   );
 
-  return (
-    <section
-      id="randevu"
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ backgroundColor: "#090909" }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(201,169,110,0.03), transparent, rgba(201,169,110,0.03))",
-        }}
-      />
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background:
-            "linear-gradient(to right, transparent, rgba(201,169,110,0.2), transparent)",
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 right-0 h-px"
-        style={{
-          background:
-            "linear-gradient(to right, transparent, rgba(201,169,110,0.2), transparent)",
-        }}
-      />
+  const inputClass = "w-full border text-white px-4 py-3 text-sm transition-all placeholder:text-[#555] focus:border-[#c9a96e]";
+  const inputStyle = { backgroundColor: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" };
 
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="absolute top-10 left-[10%] opacity-[0.03]"
-      >
-        <Scissors
-          className="w-40 h-40"
-          style={{ color: "#c9a96e" }}
-        />
+  return (
+    <section id="randevu" className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#0b0b0b" }}>
+      <div className="absolute inset-0 barber-stripe opacity-[0.02]" />
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent)" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent)" }} />
+
+      <div className="absolute top-20 right-[5%] w-64 h-64 rounded-full opacity-[0.04]" style={{ background: "radial-gradient(circle, #c9a96e, transparent 70%)" }} />
+      <div className="absolute bottom-20 left-[5%] w-48 h-48 rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #c9a96e, transparent 70%)" }} />
+
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="absolute -top-20 -right-20 opacity-[0.02]">
+        <Scissors className="w-60 h-60" style={{ color: "#c9a96e" }} />
       </motion.div>
 
-      <div
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-        ref={ref}
-      >
-        <RevealText className="text-center mb-12">
-          <span
-            className="uppercase tracking-[0.3em] text-sm font-medium"
-            style={{ color: "#c9a96e" }}
-          >
-            Randevu
-          </span>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4"
-            style={{ color: "#f0f0f0" }}
-          >
-            Hemen <span className="text-gradient-gold">Randevu</span> Alın
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+        <RevealText className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 border" style={{ borderColor: "rgba(201,169,110,0.2)", backgroundColor: "rgba(201,169,110,0.05)" }}>
+            <Calendar className="w-4 h-4" style={{ color: "#c9a96e" }} />
+            <span className="text-xs uppercase tracking-[0.2em] font-bold" style={{ color: "#c9a96e" }}>Randevu Sistemi</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase mb-4" style={{ color: "#f0f0f0" }}>
+            Online <span className="text-gradient-gold">Randevu</span>
           </h2>
-          <p
-            className="text-lg max-w-2xl mx-auto"
-            style={{ color: "#777" }}
-          >
-            Uzman berberlerimizden profesyonel hizmet almak için formu
-            doldurun veya doğrudan bize ulaşın.
-          </p>
+          <p className="text-sm max-w-lg mx-auto" style={{ color: "#555" }}>3 kolay adımda randevunuzu oluşturun</p>
         </RevealText>
 
-        <div className="grid lg:grid-cols-[1fr_300px] gap-8">
+        <div className="grid lg:grid-cols-[1fr_320px] gap-8 items-start">
           <RevealText delay={0.2}>
-            <form
-              onSubmit={handleSubmit}
-              className="border p-6 lg:p-8 space-y-5"
-              style={{
-                backgroundColor: "#121212",
-                borderColor: "rgba(255,255,255,0.06)",
-              }}
-            >
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label
-                    className="text-xs uppercase tracking-wider mb-2 block"
-                    style={{ color: "#777" }}
-                  >
-                    <User className="w-3 h-3 inline mr-1" /> Ad
-                    Soyad
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        name: e.target.value,
-                      })
-                    }
-                    placeholder="Adınızı girin"
-                    className="w-full border text-white px-4 py-3 text-sm transition-colors placeholder:text-[#555]"
-                    style={{
-                      backgroundColor: "#090909",
-                      borderColor:
-                        "rgba(255,255,255,0.08)",
-                    }}
-                  />
-                </div>
-                <div>
-                  <label
-                    className="text-xs uppercase tracking-wider mb-2 block"
-                    style={{ color: "#777" }}
-                  >
-                    <Phone className="w-3 h-3 inline mr-1" />{" "}
-                    Telefon
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        phone: e.target.value,
-                      })
-                    }
-                    placeholder="05XX XXX XX XX"
-                    className="w-full border text-white px-4 py-3 text-sm transition-colors placeholder:text-[#555]"
-                    style={{
-                      backgroundColor: "#090909",
-                      borderColor:
-                        "rgba(255,255,255,0.08)",
-                    }}
-                  />
-                </div>
-              </div>
-              <div>
-                <label
-                  className="text-xs uppercase tracking-wider mb-2 block"
-                  style={{ color: "#777" }}
-                >
-                  <Scissors className="w-3 h-3 inline mr-1" />{" "}
-                  Hizmet
-                </label>
-                <select
-                  value={formData.service}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      service: e.target.value,
-                    })
-                  }
-                  className="w-full border text-white px-4 py-3 text-sm transition-colors appearance-none"
-                  style={{
-                    backgroundColor: "#090909",
-                    borderColor:
-                      "rgba(255,255,255,0.08)",
-                  }}
-                >
-                  <option value="">Hizmet seçin...</option>
-                  {services.map((s) => (
-                    <option key={s.name} value={s.name}>
-                      {s.name} - {s.duration}
-                    </option>
+            <motion.div className="relative border overflow-hidden" style={{ borderColor: "rgba(201,169,110,0.12)", backgroundColor: "rgba(18,18,18,0.8)", backdropFilter: "blur(20px)" }}>
+              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(to right, transparent, #c9a96e, transparent)" }} />
+
+              <div className="p-6 lg:p-8">
+                <div className="flex items-center justify-between mb-8">
+                  {[1, 2, 3].map((s) => (
+                    <div key={s} className="flex items-center">
+                      <motion.div
+                        animate={{ scale: step === s ? [1, 1.15, 1] : 1 }}
+                        transition={{ duration: 0.4, repeat: step === s ? 2 : 0 }}
+                        className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-500 ${
+                          step > s ? "text-[#090909]" : step === s ? "text-white" : ""
+                        }`}
+                        style={step >= s
+                          ? { background: "linear-gradient(135deg, #c9a96e, #a88942)", boxShadow: step === s ? "0 0 20px rgba(201,169,110,0.4)" : "none" }
+                          : { backgroundColor: "rgba(255,255,255,0.05)", color: "#555", border: "1px solid rgba(255,255,255,0.1)" }
+                        }
+                      >
+                        {step > s ? "✓" : s}
+                      </motion.div>
+                      {s < 3 && (
+                        <div className="w-16 sm:w-24 lg:w-32 h-[2px] mx-2" style={{ backgroundColor: step > s ? "#c9a96e" : "rgba(255,255,255,0.06)", transition: "background-color 0.5s" }} />
+                      )}
+                    </div>
                   ))}
-                </select>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label
-                    className="text-xs uppercase tracking-wider mb-2 block"
-                    style={{ color: "#777" }}
-                  >
-                    <Calendar className="w-3 h-3 inline mr-1" />{" "}
-                    Tarih
-                  </label>
-                  <input
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        date: e.target.value,
-                      })
-                    }
-                    className="w-full border text-white px-4 py-3 text-sm transition-colors"
-                    style={{
-                      backgroundColor: "#090909",
-                      borderColor:
-                        "rgba(255,255,255,0.08)",
-                    }}
-                  />
                 </div>
-                <div>
-                  <label
-                    className="text-xs uppercase tracking-wider mb-2 block"
-                    style={{ color: "#777" }}
-                  >
-                    <Clock className="w-3 h-3 inline mr-1" />{" "}
-                    Saat
-                  </label>
-                  <select
-                    value={formData.time}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        time: e.target.value,
-                      })
-                    }
-                    className="w-full border text-white px-4 py-3 text-sm transition-colors appearance-none"
-                    style={{
-                      backgroundColor: "#090909",
-                      borderColor:
-                        "rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <option value="">Saat seçin...</option>
-                    {[
-                      "09:00",
-                      "09:30",
-                      "10:00",
-                      "10:30",
-                      "11:00",
-                      "11:30",
-                      "12:00",
-                      "13:00",
-                      "13:30",
-                      "14:00",
-                      "14:30",
-                      "15:00",
-                      "15:30",
-                      "16:00",
-                      "16:30",
-                      "17:00",
-                      "17:30",
-                      "18:00",
-                      "18:30",
-                      "19:00",
-                    ].map((t) => (
-                      <option key={t} value={t}>
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label
-                  className="text-xs uppercase tracking-wider mb-2 block"
-                  style={{ color: "#777" }}
-                >
-                  <MessageSquare className="w-3 h-3 inline mr-1" />{" "}
-                  Not (İsteğe Bağlı)
-                </label>
-                <textarea
-                  value={formData.note}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      note: e.target.value,
-                    })
-                  }
-                  placeholder="Özel isteklerinizi belirtin..."
-                  rows={3}
-                  className="w-full border text-white px-4 py-3 text-sm transition-colors resize-none placeholder:text-[#555]"
-                  style={{
-                    backgroundColor: "#090909",
-                    borderColor:
-                      "rgba(255,255,255,0.08)",
-                  }}
-                />
-              </div>
 
-              <AnimatePresence>
-                {submitted && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="bg-green-500/10 border border-green-500/20 text-green-400 p-3 text-sm text-center"
-                  >
-                    ✓ Randevu talebiniz alındı! En kısa sürede size
-                    ulaşacağız.
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold px-2 py-0.5" style={{ backgroundColor: "rgba(201,169,110,0.15)", color: "#c9a96e" }}>
+                    Adım {step}/3
+                  </span>
+                  <span className="text-xs font-medium" style={{ color: "#777" }}>
+                    {step === 1 ? "Kişisel Bilgiler" : step === 2 ? "Hizmet Seçimi" : "Tarih & Saat"}
+                  </span>
+                </div>
+
+                <AnimatePresence mode="wait">
+                  <motion.div key={step} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.3 }}>
+                    {step === 1 && (
+                      <div className="space-y-5">
+                        <div>
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                            <User className="w-3 h-3 inline mr-1" style={{ color: "#c9a96e" }} /> Ad Soyad
+                          </label>
+                          <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Adınızı girin" className={inputClass} style={inputStyle} />
+                        </div>
+                        <div>
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                            <Phone className="w-3 h-3 inline mr-1" style={{ color: "#c9a96e" }} /> Telefon
+                          </label>
+                          <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="05XX XXX XX XX" className={inputClass} style={inputStyle} />
+                        </div>
+                        <div>
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                            <MessageSquare className="w-3 h-3 inline mr-1" style={{ color: "#c9a96e" }} /> Not (İsteğe Bağlı)
+                          </label>
+                          <textarea value={formData.note} onChange={(e) => setFormData({ ...formData, note: e.target.value })} placeholder="Özel isteklerinizi belirtin..." rows={2} className={`${inputClass} resize-none`} style={inputStyle} />
+                        </div>
+                      </div>
+                    )}
+                    {step === 2 && (
+                      <div className="space-y-4">
+                        <div>
+                          <label className="text-[10px] uppercase tracking-[0.15em] mb-3 block font-bold" style={{ color: "#555" }}>
+                            <Scissors className="w-3 h-3 inline mr-1" style={{ color: "#c9a96e" }} /> Hizmet Seçin
+                          </label>
+                          <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto custom-scrollbar pr-1">
+                            {services.map((s) => (
+                              <motion.button
+                                key={s.name}
+                                type="button"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => setFormData({ ...formData, service: s.name })}
+                                className={`p-3 border text-left transition-all duration-300 ${formData.service === s.name ? "border-[#c9a96e]" : ""}`}
+                                style={{
+                                  backgroundColor: formData.service === s.name ? "rgba(201,169,110,0.08)" : "rgba(255,255,255,0.02)",
+                                  borderColor: formData.service === s.name ? "rgba(201,169,110,0.4)" : "rgba(255,255,255,0.06)",
+                                  boxShadow: formData.service === s.name ? "0 0 15px rgba(201,169,110,0.1)" : "none",
+                                }}
+                              >
+                                <div className="flex items-center gap-2 mb-1">
+                                  <s.icon className="w-3.5 h-3.5" style={{ color: formData.service === s.name ? "#c9a96e" : "#555" }} />
+                                  <span className="text-xs font-bold uppercase" style={{ color: formData.service === s.name ? "#c9a96e" : "#ccc" }}>{s.name}</span>
+                                </div>
+                                <span className="text-[10px]" style={{ color: "#555" }}>{s.duration}</span>
+                              </motion.button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {step === 3 && (
+                      <form onSubmit={handleSubmit} className="space-y-5">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                              <Calendar className="w-3 h-3 inline mr-1" style={{ color: "#c9a96e" }} /> Tarih
+                            </label>
+                            <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className={inputClass} style={inputStyle} />
+                          </div>
+                          <div>
+                            <label className="text-[10px] uppercase tracking-[0.15em] mb-2 block font-bold" style={{ color: "#555" }}>
+                              <Clock className="w-3 h-3 inline mr-1" style={{ color: "#c9a96e" }} /> Saat
+                            </label>
+                            <select value={formData.time} onChange={(e) => setFormData({ ...formData, time: e.target.value })} className={`${inputClass} appearance-none`} style={inputStyle}>
+                              <option value="">Saat seçin...</option>
+                              {["09:00","09:30","10:00","10:30","11:00","11:30","12:00","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"].map((t) => (
+                                <option key={t} value={t}>{t}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="p-4 border space-y-3" style={{ borderColor: "rgba(201,169,110,0.15)", backgroundColor: "rgba(201,169,110,0.03)" }}>
+                          <span className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: "#c9a96e" }}>Randevu Özeti</span>
+                          <div className="grid grid-cols-2 gap-2 text-xs">
+                            <div><span style={{ color: "#555" }}>Ad:</span> <span className="text-white ml-1">{formData.name || "-"}</span></div>
+                            <div><span style={{ color: "#555" }}>Tel:</span> <span className="text-white ml-1">{formData.phone || "-"}</span></div>
+                            <div><span style={{ color: "#555" }}>Hizmet:</span> <span className="ml-1" style={{ color: "#c9a96e" }}>{formData.service || "-"}</span></div>
+                            <div><span style={{ color: "#555" }}>Tarih:</span> <span className="text-white ml-1">{formData.date || "-"} {formData.time}</span></div>
+                          </div>
+                        </div>
+
+                        <AnimatePresence>
+                          {submitted && (
+                            <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.95 }} className="p-4 text-center" style={{ backgroundColor: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)" }}>
+                              <Sparkles className="w-6 h-6 mx-auto mb-2" style={{ color: "#22c55e" }} />
+                              <p className="text-sm font-bold" style={{ color: "#22c55e" }}>Randevu talebiniz alındı!</p>
+                              <p className="text-xs mt-1" style={{ color: "#555" }}>En kısa sürede size ulaşacağız.</p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        <motion.a
+                          href={`https://wa.me/905551234567?text=${whatsappMessage}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex items-center justify-center gap-3 w-full py-4 text-white font-bold uppercase tracking-wider text-sm transition-all"
+                          style={{ backgroundColor: "#25D366" }}
+                        >
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                          WhatsApp ile Onayla
+                        </motion.a>
+
+                        <Button type="submit" className="w-full text-[#090909] font-bold uppercase tracking-wider py-4 text-sm" style={{ backgroundColor: "#c9a96e" }}>
+                          <Send className="w-4 h-4 mr-2" /> Randevuyu Tamamla
+                        </Button>
+                      </form>
+                    )}
                   </motion.div>
-                )}
-              </AnimatePresence>
+                </AnimatePresence>
 
-              <Button
-                type="submit"
-                className="w-full text-white font-semibold uppercase tracking-wider py-4 rounded-none transition-all duration-300"
-                style={{ backgroundColor: "#c9a96e" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "#e0c68b";
-                  e.currentTarget.style.boxShadow =
-                    "0 0 20px rgba(201,169,110,0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "#c9a96e";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <Send className="w-4 h-4 mr-2" /> Randevu
-                Gönder
-              </Button>
-            </form>
+                {step < 3 && (
+                  <div className="flex justify-end mt-8">
+                    <motion.button
+                      type="button"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => canGoNext() && setStep(step + 1)}
+                      disabled={!canGoNext()}
+                      className="flex items-center gap-2 px-8 py-3 text-sm font-bold uppercase tracking-wider text-[#090909] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                      style={{ backgroundColor: canGoNext() ? "#c9a96e" : "rgba(255,255,255,0.05)", color: canGoNext() ? "#090909" : "#555" }}
+                    >
+                      Devam <ChevronRight className="w-4 h-4" />
+                    </motion.button>
+                  </div>
+                )}
+
+                {step > 1 && step < 4 && (
+                  <div className="mt-4">
+                    <button type="button" onClick={() => setStep(step - 1)} className="text-xs uppercase tracking-wider flex items-center gap-1 transition-colors" style={{ color: "#555" }}>
+                      <ChevronRight className="w-3 h-3 rotate-180" /> Geri Dön
+                    </button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
           </RevealText>
 
           <RevealText delay={0.4}>
-            <div className="space-y-4">
-              <a
-                href={`https://wa.me/905551234567?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="text-white p-5 cursor-pointer transition-shadow duration-300"
-                  style={{ backgroundColor: "#25D366" }}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <svg
-                      className="w-6 h-6"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    <span className="font-bold uppercase tracking-wider">
-                      WhatsApp
-                    </span>
+            <div className="space-y-3">
+              <div className="p-5 border" style={{ borderColor: "rgba(201,169,110,0.1)", backgroundColor: "rgba(18,18,18,0.6)", backdropFilter: "blur(10px)" }}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #c9a96e, #a88942)" }}>
+                    <Clock className="w-5 h-5 text-white" />
                   </div>
-                  <p className="text-white/80 text-xs">
-                    Anında randevu alın, hızlı iletişim
-                  </p>
-                </motion.div>
-              </a>
+                  <div>
+                    <span className="text-sm font-bold text-white block">Çalışma Saatleri</span>
+                    <span className="text-[10px]" style={{ color: "#555" }}>Haftaiçi & Cumartesi</span>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  {["Pzt - Cmt", "Pazar"].map((day, idx) => (
+                    <div key={day} className="flex justify-between items-center py-1.5 border-b last:border-b-0" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+                      <span className="text-xs" style={{ color: "#777" }}>{day}</span>
+                      <span className={`text-xs font-bold ${idx === 1 ? "text-red-400" : "text-white"}`}>{idx === 1 ? "Kapalı" : "09:00 - 20:00"}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-              <a
-                href={`mailto:slickstyle@gmail.com?subject=${gmailSubject}&body=${gmailBody}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="text-white p-5 cursor-pointer transition-shadow duration-300"
-                  style={{
-                    background:
-                      "linear-gradient(to right, #c9a96e, #a88942)",
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Mail className="w-6 h-6" />
-                    <span className="font-bold uppercase tracking-wider">
-                      E-Posta
-                    </span>
+              <a href={`mailto:slickstyle@gmail.com?subject=${gmailSubject}&body=${gmailBody}`} target="_blank" rel="noopener noreferrer">
+                <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className="p-4 border flex items-center gap-3 cursor-pointer transition-all" style={{ borderColor: "rgba(255,255,255,0.06)", backgroundColor: "rgba(18,18,18,0.4)" }}>
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(201,169,110,0.1)" }}>
+                    <Mail className="w-4 h-4" style={{ color: "#c9a96e" }} />
                   </div>
-                  <p className="text-white/80 text-xs">
-                    slickstyle@gmail.com
-                  </p>
+                  <div>
+                    <span className="text-xs font-bold text-white block">E-Posta ile İletişim</span>
+                    <span className="text-[10px]" style={{ color: "#555" }}>slickstyle@gmail.com</span>
+                  </div>
                 </motion.div>
               </a>
 
               <a href="tel:+905551234567">
-                <motion.div
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="border text-white p-5 cursor-pointer transition-colors duration-300"
-                  style={{
-                    backgroundColor: "#121212",
-                    borderColor: "rgba(255,255,255,0.08)",
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Phone
-                      className="w-6 h-6"
-                      style={{ color: "#c9a96e" }}
-                    />
-                    <span className="font-bold uppercase tracking-wider">
-                      Ara
-                    </span>
+                <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className="p-4 border flex items-center gap-3 cursor-pointer transition-all" style={{ borderColor: "rgba(255,255,255,0.06)", backgroundColor: "rgba(18,18,18,0.4)" }}>
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(201,169,110,0.1)" }}>
+                    <Phone className="w-4 h-4" style={{ color: "#c9a96e" }} />
                   </div>
-                  <p
-                    className="text-xs"
-                    style={{ color: "#777" }}
-                  >
-                    0555 123 45 67
-                  </p>
+                  <div>
+                    <span className="text-xs font-bold text-white block">Bizi Arayın</span>
+                    <span className="text-[10px]" style={{ color: "#555" }}>0555 123 45 67</span>
+                  </div>
                 </motion.div>
               </a>
 
-              <div
-                className="border p-5"
-                style={{
-                  backgroundColor: "#121212",
-                  borderColor: "rgba(255,255,255,0.06)",
-                }}
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <Clock
-                    className="w-5 h-5"
-                    style={{ color: "#c9a96e" }}
-                  />
-                  <span className="font-bold uppercase tracking-wider text-sm">
-                    Çalışma Saatleri
-                  </span>
-                </div>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span style={{ color: "#777" }}>
-                      Pazartesi - Cumartesi
-                    </span>
-                    <span className="text-white font-medium">
-                      09:00 - 20:00
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span style={{ color: "#777" }}>Pazar</span>
-                    <span className="text-red-400 font-medium">
-                      Kapalı
-                    </span>
-                  </div>
-                </div>
+              <div className="p-5 text-center" style={{ background: "linear-gradient(135deg, rgba(201,169,110,0.08), rgba(201,169,110,0.02))", border: "1px solid rgba(201,169,110,0.15)" }}>
+                <Scissors className="w-6 h-6 mx-auto mb-2" style={{ color: "#c9a96e" }} />
+                <p className="text-xs font-bold text-white mb-1">İlk Ziyaretinize Özel</p>
+                <p className="text-2xl font-bold text-gradient-gold">%50 İndirim</p>
+                <p className="text-[10px] mt-1" style={{ color: "#555" }}>Tüm hizmetlerde geçerli</p>
               </div>
             </div>
           </RevealText>
