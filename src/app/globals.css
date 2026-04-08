@@ -192,3 +192,77 @@ html {
     rgba(232, 125, 47, 0.03) 20px
   );
 }
+
+/* Custom page scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e87d2f;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(232, 125, 47, 0.3);
+  color: #fff;
+}
+
+/* Smooth reveal animation for all sections */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(232, 125, 47, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(232, 125, 47, 0.25); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(232,125,47,0.05) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Global link transition */
+a {
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Focus styles */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #e87d2f !important;
+   box-shadow: 0 0 0 1px rgba(232, 125, 47, 0.2);
+}
+
+/* Date input dark mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+select option {
+  background: #1a1a1a;
+  color: #fff;
+}
